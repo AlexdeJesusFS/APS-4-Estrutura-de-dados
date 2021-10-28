@@ -1,4 +1,7 @@
 ### Java ###
+#Arquivos para o Libraries#
+#!arquivo.extensão → não ignora este arquivo
+
 # Compiled class file
 *.class
 
