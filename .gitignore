@@ -1,7 +1,7 @@
 ### Java ###
 #Arquivos para o Libraries#
 #!arquivo.extensão → não ignora este arquivo
-!log4j-api-2.14.1.jar
+!/Libraries
 
 # Compiled class file
 *.class
