@@ -10,6 +10,10 @@ public class Dados {
 	private double indReflorestamento;
 	private double indIndustrial;
 	
+	public Dados() {
+		
+	}
+	
 	public Dados(int codigo, String dataPost, String dataAtualiz, String siglaEstado, double areaTotal, double areaDesmatadaAno, double indReflorestamento, double indIndustrial){
 		setCodigo(codigo);
 		setDataPost(dataPost);
@@ -20,6 +24,7 @@ public class Dados {
 		setIndReflorestamento(indReflorestamento);
 		setIndIndustrial(indIndustrial);
 	}
+	
 	
 	//Getter and Setters
 	public int getCodigo() {

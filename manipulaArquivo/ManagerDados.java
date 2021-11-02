@@ -6,19 +6,23 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ManagerDados {
 	private BufferedReader br;
 	private BufferedWriter bw;
 	private File arquivo;
-	public void CriarArquivo(String nomeDoArquivo) {
+	
+	//Metodos
+	//Caso não exista cria o arquivo que será salvo os dados.
+	public void CriarArquivo(String nomeDoArquivo) {  
 		try {
 			arquivo = new File(nomeDoArquivo+".txt");
 			if(arquivo.createNewFile()) {
 				System.out.println("Arquivo "+arquivo.getName()+" Criado com sucesso!");
 			}
 			else {
-				System.out.println("Arquivo j� existe!");
+				System.out.println("Arquivo j� existe!");
 			}
 		}
 		catch(IOException e) {
@@ -26,7 +30,8 @@ public class ManagerDados {
 		}
 	}
 	
-	public void EscreverArquivo(Dados dado, String nomeDoArquivo) {
+	//Escreve no final do arquivo os dados adicionados
+	public void EscreverArquivo(Dados dado, String nomeDoArquivo) { 
 		try {
 			boolean verificador = ChecaArquivo(nomeDoArquivo);
 			bw = new BufferedWriter(new FileWriter(nomeDoArquivo+".txt",true));
@@ -49,32 +54,52 @@ public class ManagerDados {
 		}
 	}
 	
-	public Dados[] LerArquivo(String nomeDoArquivo) {
-		int quantidadeDeDados = 0;
+	//Sobrescreve o arquivo existente com os dados da Arraylist
+	public void EscreverArquivo(ArrayList<Dados> informacao, String nomeDoArquivo) { 
 		try {
-			boolean verificador = ChecaArquivo(nomeDoArquivo);
-			br = new BufferedReader(new FileReader(nomeDoArquivo+".txt"));
-			if(verificador) {
-				while(br.readLine()!=null) {
-					if(br.readLine().equals("--count--\n")) {
-						quantidadeDeDados++;
-					}
-					
-					br.readLine();
-					br.close();	
-				}	
-			}else {
-				quantidadeDeDados = 0;
-			}
+			bw = new BufferedWriter(new FileWriter(nomeDoArquivo+".txt",false));
+			bw.write("");
+			informacao.forEach((dado) -> EscreverArquivo(dado,nomeDoArquivo));
 		}
 		catch(IOException e) {
-			System.out.println(e);
+			System.out.print(e);
 		}
-		
-		Dados[] resultado = new Dados[quantidadeDeDados];
-		return resultado;
 	}
 	
+	//Lê o arquivo completo e retorna todos os valores para uma Arraylist
+	public ArrayList<Dados> LerArquivo(String nomeDoArquivo) throws IOException{
+		br = new BufferedReader(new FileReader(nomeDoArquivo+".txt"));
+		ArrayList<Dados> lista = new ArrayList<Dados>();
+		String verificador = "";
+		do {
+			br.readLine();
+			verificador = br.readLine();
+			if(verificador!=null) {
+				Dados informacao = new Dados();
+				informacao.setCodigo(Integer.parseInt(verificador));
+				informacao.setDataPost(br.readLine());
+				informacao.setDataAtualiz(br.readLine());
+				informacao.setSiglaEstado(br.readLine());
+				informacao.setAreaTotal(Double.parseDouble(br.readLine()));
+				informacao.setAreaDesmatadaAno(Double.parseDouble(br.readLine()));
+				informacao.setIndReflorestamento(Double.parseDouble(br.readLine()));
+				informacao.setIndIndustrial(Double.parseDouble(br.readLine()));
+				lista.add(informacao);
+			}
+		}
+		while(verificador!=null);
+		return lista;
+	}
+	
+	public boolean PesquisarDados(Dados dado, String nomeDoArquivo) throws IOException{
+		//metodo incompleto, não funcional
+		ArrayList<Dados> lista = new ArrayList<Dados>();
+		lista = LerArquivo(nomeDoArquivo);
+		
+		return true;
+	}
+	
+	//verifica se o arquivo possui dados escritos
 	public boolean ChecaArquivo(String nomeDoArquivo) throws IOException {
 		br = new BufferedReader(new FileReader(nomeDoArquivo+".txt"));
 		String verificada = br.readLine();
@@ -86,18 +111,17 @@ public class ManagerDados {
 		}
 	}
 	
+	//conta a quantidade de dados presentes no arquivo
 	public int ContarQuantidade(String nomeDoArquivo) throws IOException{
 		int contador = 0;
 		br = new BufferedReader(new FileReader(nomeDoArquivo+".txt"));
 		String linha = "";
-		while(linha!=null) {
-			linha = br.readLine();
-			if(linha != null) {
-				if(linha.equals("--count--\n")) {
-					contador++;
-				}
+		while((linha=br.readLine())!=null) {
+			if(linha.equals("--count--")) {
+				contador++;
 			}
 		}
+		br.close();
 		return contador;
 	}
 }

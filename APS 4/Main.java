@@ -2,29 +2,40 @@
 package APS;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
 import manipulaArquivo.Dados;
 import manipulaArquivo.ManagerDados;
 
 public class Main {
 
     public static void main(String[] args) {
-      /*
+    	/*//-- Testes que o Guilherme estava fazendo --
     	String nome = "dados";
     	ManagerDados dados = new ManagerDados();
-    	Dados info = new Dados(1,"a","b","c",20.0,30.0,40.0,50.0);
+    	ArrayList<Dados> lista = new ArrayList<Dados>();
     	
-    	dados.CriarArquivo(nome);
-        dados.EscreverArquivo(info,nome);
-        dados.EscreverArquivo(info,nome);
-        
+    	Dados info = new Dados(1,"a","b","c",20.0,30.0,40.0,50.0);
+    	//dados.CriarArquivo(nome);
+        //dados.EscreverArquivo(info,nome);
+        //dados.EscreverArquivo(info,nome);
         try {
-        	int contador =	dados.ContarQuantidade(nome);
-        	System.out.println(contador);
+        	lista = dados.LerArquivo(nome);
+        	
+        	System.out.println(lista.contains(info));
+        	System.out.println(dados.PesquisarDados(info, nome));
         }catch(IOException e) {
         	System.out.println(e);
         }
+        
+        //lista.get(0).setCodigo(3);
+        //lista.get(1).setCodigo(2);
+        
+        //System.out.println(lista.get(0).getCodigo());
+        //System.out.println(lista.get(1).getCodigo());
+        
+        //dados.EscreverArquivo(lista, nome);
         */
+    	
         int[] vetor = new int[10];
         
         for (int i = 0; i < vetor.length; i++) {
@@ -45,6 +56,7 @@ public class Main {
             System.out.print(vetor[i] + " ");
         }
         System.out.println("");
+        
     }
     
 }
