@@ -1,6 +1,7 @@
 package manipulaArquivo;
 
 public class Dados {
+	private int indice;
 	private int codigo;
 	private String dataPost;
 	private String dataAtualiz;
@@ -27,6 +28,14 @@ public class Dados {
 	
 	
 	//Getter and Setters
+	public int getIndice() {
+		return indice;
+	}
+	
+	public void setIndice(int indice) {
+		this.indice = indice;
+	}
+	
 	public int getCodigo() {
 		return codigo;
 	}

@@ -22,13 +22,15 @@ public class ManagerDados {
 				System.out.println("Arquivo "+arquivo.getName()+" Criado com sucesso!");
 			}
 			else {
-				System.out.println("Arquivo j� existe!");
+				System.out.println("Arquivo já existe!");
 			}
 		}
 		catch(IOException e) {
 			System.out.println(e);
 		}
 	}
+	
+	//Metodos de Manipulação de Dados
 	
 	//Escreve no final do arquivo os dados adicionados
 	public void EscreverArquivo(Dados dado, String nomeDoArquivo) { 
@@ -88,16 +90,114 @@ public class ManagerDados {
 			}
 		}
 		while(verificador!=null);
+		for (Dados dado : lista) {
+			dado.setIndice(Indice(lista, dado));
+		}
 		return lista;
 	}
 	
-	public boolean PesquisarDados(Dados dado, String nomeDoArquivo) throws IOException{
-		//metodo incompleto, não funcional
-		ArrayList<Dados> lista = new ArrayList<Dados>();
-		lista = LerArquivo(nomeDoArquivo);
-		
-		return true;
+	public void Update(int indice, Dados dado, ArrayList<Dados> lista, String nomeDoArquivo) throws IOException{
+		lista.set(indice, dado);
+		EscreverArquivo(lista, nomeDoArquivo);
 	}
+	
+	public void Delete(String nomeDoArquivo) throws IOException{
+		ArrayList<Dados> lista = LerArquivo(nomeDoArquivo);
+		lista.remove(0);
+		EscreverArquivo(lista, nomeDoArquivo);
+	}
+	
+	//Metodos de Pesquisa
+	
+		public ArrayList<Dados> PesquisaCodigo(int codigo, String nomeDoArquivo) throws IOException{
+			ArrayList<Dados> resultado = new ArrayList<Dados>();
+	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
+			for(Dados dado: informacoes) {
+				if(dado.getCodigo()==codigo) {
+					resultado.add(dado);
+				}
+			}
+			return resultado;
+		}
+		
+		public ArrayList<Dados> PesquisaDataPost(String dataPost, String nomeDoArquivo) throws IOException{
+			ArrayList<Dados> resultado = new ArrayList<Dados>();
+	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
+			for(Dados dado: informacoes) {
+				if(dado.getDataPost()==dataPost) {
+					resultado.add(dado);
+				}
+			}
+			return resultado;
+		}
+		
+		public ArrayList<Dados> PesquisaDataAtualiz(String dataAtualiz, String nomeDoArquivo) throws IOException{
+			ArrayList<Dados> resultado = new ArrayList<Dados>();
+	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
+			for(Dados dado: informacoes) {
+				if(dado.getDataAtualiz()==dataAtualiz) {
+					resultado.add(dado);
+				}
+			}
+			return resultado;
+		}
+		
+		public ArrayList<Dados> PesquisaSigla(String siglaEstado, String nomeDoArquivo) throws IOException{
+			ArrayList<Dados> resultado = new ArrayList<Dados>();
+	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
+			for(Dados dado: informacoes) {
+				if(dado.getSiglaEstado()==siglaEstado) {
+					resultado.add(dado);
+				}
+			}
+			return resultado;
+		}
+		
+		public ArrayList<Dados> PesquisaAreaTotal(double areaTotal, String nomeDoArquivo) throws IOException{
+			ArrayList<Dados> resultado = new ArrayList<Dados>();
+	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
+			for(Dados dado: informacoes) {
+				if(dado.getAreaTotal()==areaTotal) {
+					resultado.add(dado);
+				}
+			}
+			return resultado;
+		}
+		
+		public ArrayList<Dados> PesquisaAreaDesmatadaAno(double areaDesmatadaAno, String nomeDoArquivo) throws IOException{
+			ArrayList<Dados> resultado = new ArrayList<Dados>();
+	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
+			for(Dados dado: informacoes) {
+				if(dado.getAreaDesmatadaAno()==areaDesmatadaAno) {
+					resultado.add(dado);
+				}
+			}
+			return resultado;
+		}
+		
+		public ArrayList<Dados> PesquisaIndReflorestamento(double indReflorestamento, String nomeDoArquivo) throws IOException{
+			ArrayList<Dados> resultado = new ArrayList<Dados>();
+	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
+			for(Dados dado: informacoes) {
+				if(dado.getIndReflorestamento()==indReflorestamento) {
+					resultado.add(dado);
+				}
+			}
+			return resultado;
+		}
+		
+		public ArrayList<Dados> PesquisaIndIndustrial(double indIndustrial, String nomeDoArquivo) throws IOException{
+			ArrayList<Dados> resultado = new ArrayList<Dados>();
+	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
+			for(Dados dado: informacoes) {
+				if(dado.getIndIndustrial()==indIndustrial) {
+					resultado.add(dado);
+				}
+			}
+			return resultado;
+		}
+		
+	//Métodos de Utilidade
 	
 	//verifica se o arquivo possui dados escritos
 	public boolean ChecaArquivo(String nomeDoArquivo) throws IOException {
@@ -123,6 +223,10 @@ public class ManagerDados {
 		}
 		br.close();
 		return contador;
+	}
+	
+	public int Indice(ArrayList<Dados> lista, Dados dado) {
+		return lista.indexOf(dado);
 	}
 }
 
