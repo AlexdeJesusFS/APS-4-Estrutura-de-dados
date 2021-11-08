@@ -1,9 +1,8 @@
-package manipulaArquivo;
+package model;
 
 public class Dados {
 	private int indice;
-	private int codigo;
-	private String dataPost;
+	private String ano;
 	private String dataAtualiz;
 	private String SiglaEstado;
 	private double areaTotal;
@@ -15,15 +14,14 @@ public class Dados {
 		
 	}
 	
-	public Dados(int codigo, String dataPost, String dataAtualiz, String siglaEstado, double areaTotal, double areaDesmatadaAno, double indReflorestamento, double indIndustrial){
-		setCodigo(codigo);
-		setDataPost(dataPost);
-		setDataAtualiz(dataAtualiz);
+	public Dados(String ano ,String siglaEstado, double areaTotal, double areaDesmatadaAno, double indReflorestamento, double indIndustrial){
+		setAno(ano);
 		setSiglaEstado(siglaEstado);
 		setAreaTotal(areaTotal);
 		setAreaDesmatadaAno(areaDesmatadaAno);
 		setIndReflorestamento(indReflorestamento);
 		setIndIndustrial(indIndustrial);
+		setDataAtualiz("");
 	}
 	
 	
@@ -36,20 +34,12 @@ public class Dados {
 		this.indice = indice;
 	}
 	
-	public int getCodigo() {
-		return codigo;
+	public String getAno() {
+		return ano;
 	}
-	
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
-	
-	public String getDataPost() {
-		return dataPost;
-	}
-	
-	public void setDataPost(String dataPost) {
-		this.dataPost = dataPost;
+
+	public void setAno(String ano) {
+		this.ano = ano;
 	}
 	
 	public String getDataAtualiz() {
