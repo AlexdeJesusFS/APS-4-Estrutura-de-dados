@@ -1,4 +1,4 @@
-package manipulaArquivo;
+package model;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,26 +8,22 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ManagerDados {
+public class DadosDAO {
 	private BufferedReader br;
 	private BufferedWriter bw;
 	private File arquivo;
 	
 	//Metodos
 	//Caso não exista cria o arquivo que será salvo os dados.
-	public void CriarArquivo(String nomeDoArquivo) {  
-		try {
-			arquivo = new File(nomeDoArquivo+".txt");
+	public void CriarArquivo(String nomeDoArquivo) throws IOException{  
+			arquivo = new File("C:/Aps4Dados/"+nomeDoArquivo+".txt");
+			arquivo.getParentFile().mkdir();
 			if(arquivo.createNewFile()) {
 				System.out.println("Arquivo "+arquivo.getName()+" Criado com sucesso!");
 			}
 			else {
 				System.out.println("Arquivo já existe!");
 			}
-		}
-		catch(IOException e) {
-			System.out.println(e);
-		}
 	}
 	
 	//Metodos de Manipulação de Dados
@@ -36,13 +32,12 @@ public class ManagerDados {
 	public void EscreverArquivo(Dados dado, String nomeDoArquivo) { 
 		try {
 			boolean verificador = ChecaArquivo(nomeDoArquivo);
-			bw = new BufferedWriter(new FileWriter(nomeDoArquivo+".txt",true));
+			bw = new BufferedWriter(new FileWriter("C:/Aps4Dados/"+nomeDoArquivo+".txt",true));
 			if(!verificador) {
 				bw.write("--Inicio--\n");	
 			}
-			bw.write(dado.getCodigo()+"\n");
+			bw.write(dado.getAno()+"\n");
 			bw.write(dado.getDataAtualiz()+"\n");
-			bw.write(dado.getDataPost()+"\n");
 			bw.write(dado.getSiglaEstado()+"\n");
 			bw.write(dado.StringAreaTotal()+"\n");
 			bw.write(dado.StringAreaDesmatada()+"\n");
@@ -57,20 +52,15 @@ public class ManagerDados {
 	}
 	
 	//Sobrescreve o arquivo existente com os dados da Arraylist
-	public void EscreverArquivo(ArrayList<Dados> informacao, String nomeDoArquivo) { 
-		try {
-			bw = new BufferedWriter(new FileWriter(nomeDoArquivo+".txt",false));
+	public void EscreverArquivo(ArrayList<Dados> informacao, String nomeDoArquivo) throws IOException{ 
+			bw = new BufferedWriter(new FileWriter("C:/Aps4Dados/"+nomeDoArquivo+".txt",false));
 			bw.write("");
 			informacao.forEach((dado) -> EscreverArquivo(dado,nomeDoArquivo));
-		}
-		catch(IOException e) {
-			System.out.print(e);
-		}
 	}
 	
 	//Lê o arquivo completo e retorna todos os valores para uma Arraylist
 	public ArrayList<Dados> LerArquivo(String nomeDoArquivo) throws IOException{
-		br = new BufferedReader(new FileReader(nomeDoArquivo+".txt"));
+		br = new BufferedReader(new FileReader("C:/Aps4Dados/"+nomeDoArquivo+".txt"));
 		ArrayList<Dados> lista = new ArrayList<Dados>();
 		String verificador = "";
 		do {
@@ -78,8 +68,7 @@ public class ManagerDados {
 			verificador = br.readLine();
 			if(verificador!=null) {
 				Dados informacao = new Dados();
-				informacao.setCodigo(Integer.parseInt(verificador));
-				informacao.setDataPost(br.readLine());
+				informacao.setAno(verificador);
 				informacao.setDataAtualiz(br.readLine());
 				informacao.setSiglaEstado(br.readLine());
 				informacao.setAreaTotal(Double.parseDouble(br.readLine()));
@@ -97,6 +86,7 @@ public class ManagerDados {
 	}
 	
 	public void Update(int indice, Dados dado, ArrayList<Dados> lista, String nomeDoArquivo) throws IOException{
+		
 		lista.set(indice, dado);
 		EscreverArquivo(lista, nomeDoArquivo);
 	}
@@ -108,23 +98,11 @@ public class ManagerDados {
 	}
 	
 	//Metodos de Pesquisa
-	
-		public ArrayList<Dados> PesquisaCodigo(int codigo, String nomeDoArquivo) throws IOException{
+		public ArrayList<Dados> PesquisaAno(String Ano, String nomeDoArquivo) throws IOException{
 			ArrayList<Dados> resultado = new ArrayList<Dados>();
 	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
 			for(Dados dado: informacoes) {
-				if(dado.getCodigo()==codigo) {
-					resultado.add(dado);
-				}
-			}
-			return resultado;
-		}
-		
-		public ArrayList<Dados> PesquisaDataPost(String dataPost, String nomeDoArquivo) throws IOException{
-			ArrayList<Dados> resultado = new ArrayList<Dados>();
-	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
-			for(Dados dado: informacoes) {
-				if(dado.getDataPost()==dataPost) {
+				if(dado.getAno()==Ano) {
 					resultado.add(dado);
 				}
 			}
@@ -201,7 +179,7 @@ public class ManagerDados {
 	
 	//verifica se o arquivo possui dados escritos
 	public boolean ChecaArquivo(String nomeDoArquivo) throws IOException {
-		br = new BufferedReader(new FileReader(nomeDoArquivo+".txt"));
+		br = new BufferedReader(new FileReader("C:/Aps4Dados/"+nomeDoArquivo+".txt"));
 		String verificada = br.readLine();
 		br.close();
 		if(verificada==null) {
@@ -214,7 +192,7 @@ public class ManagerDados {
 	//conta a quantidade de dados presentes no arquivo
 	public int ContarQuantidade(String nomeDoArquivo) throws IOException{
 		int contador = 0;
-		br = new BufferedReader(new FileReader(nomeDoArquivo+".txt"));
+		br = new BufferedReader(new FileReader("C:/Aps4Dados/"+nomeDoArquivo+".txt"));
 		String linha = "";
 		while((linha=br.readLine())!=null) {
 			if(linha.equals("--count--")) {
