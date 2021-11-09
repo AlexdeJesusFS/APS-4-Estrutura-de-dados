@@ -1,4 +1,4 @@
-
+package view;
 
 public class UpdateMenu extends TelaBase{
     
@@ -32,20 +32,20 @@ public class UpdateMenu extends TelaBase{
         stateLabel.setText("Estado:");
 
         updateStateChoice.setFont(new java.awt.Font("Dialog", 0, 14));
-        updateStateChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acre", "Alagoas", "Amap·", "Amazonas", "Bahia", "Cear·", "EspÌrito Santo", "Goi·s", "Maranh„o", "Mato Grosso", "Mato Grosso do sul", "Minas Gerais", "Par·", "ParaÌba", "Paran·", "Pernambuco", "Piau·", "Rio de Janeiro", "Rio Grande do norte", "Rio Grande do sul", "RondÙnia", "Roraima", "Santa Catarina", "S„o Paulo", "Sergipe", "Tocantins", "Distrito Federal" }));
+        updateStateChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acre", "Alagoas", "Amap√°", "Amazonas", "Bahia", "Cear√°", "Esp√≠rito Santo", "Goi√°s", "Maranh√£o", "Mato Grosso", "Mato Grosso do sul", "Minas Gerais", "Par√°", "Para√≠ba", "Paran√°", "Pernambuco", "Piau√≠", "Rio de Janeiro", "Rio Grande do norte", "Rio Grande do sul", "Rond√¥nia", "Roraima", "Santa Catarina", "S√£o Paulo", "Sergipe", "Tocantins", "Distrito Federal" }));
 
         areaNameLabel.setFont(new java.awt.Font("Dialog", 0, 14)); 
-        areaNameLabel.setText("Nome da ·rea:");
+        areaNameLabel.setText("Nome da √Årea:");
 
         updateAreaName.setFont(new java.awt.Font("Dialog", 0, 14)); 
 
         areaLabel.setFont(new java.awt.Font("Dialog", 0, 14)); 
-        areaLabel.setText("·rea total(km≤):");
+        areaLabel.setText("√Årea total(km¬≤):");
 
         updateArea.setFont(new java.awt.Font("Dialog", 0, 14)); 
 
         defAreaLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-        defAreaLabel.setText("·rea desmatada este ano(km≤):");
+        defAreaLabel.setText("√Årea desmatada este ano(km¬≤):");
 
         updateDefArea.setFont(new java.awt.Font("Dialog", 0, 14));
 
@@ -205,7 +205,7 @@ public class UpdateMenu extends TelaBase{
         this.setStateChoice(TelaBase.estado);
         this.setAreaName(TelaBase.nome);
         this.setArea(TelaBase.areaTo);
-        this.setAreaDef(TelaBase.areaDes);
+        this.setAreaDesm(TelaBase.areaDes);
         this.setPorIndus(TelaBase.porInd);
         this.setPorReflo(TelaBase.porRef);
     }    
@@ -250,14 +250,16 @@ public class UpdateMenu extends TelaBase{
         updateArea.setText(area);
     }
     
-    public String getAreaDef(){
+    public String getAreaDesm(){
         return updateDefArea.getText();
     }
-    public void setAreaDef(String aread){
+    public void setAreaDesm(String aread){
+    	//renomear esse objeto abaixo
         updateDefArea.setText(aread);
     }
     
     public String getPorIndus(){
+    	//renomear esse objeto abaixo
         return updatePorIndus.getText();
     }
     public void setPorIndus(String porInd){

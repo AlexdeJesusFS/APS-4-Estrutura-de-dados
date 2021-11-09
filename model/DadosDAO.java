@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class DadosDAO {
 	private BufferedReader br;
@@ -19,10 +20,10 @@ public class DadosDAO {
 			arquivo = new File("C:/Aps4Dados/"+nomeDoArquivo+".txt");
 			arquivo.getParentFile().mkdir();
 			if(arquivo.createNewFile()) {
-				System.out.println("Arquivo "+arquivo.getName()+" Criado com sucesso!");
+				JOptionPane.showMessageDialog(null,"Arquivo "+arquivo.getName()+" Criado com sucesso!");
 			}
 			else {
-				System.out.println("Arquivo já existe!");
+				JOptionPane.showMessageDialog(null,"Arquivo já existe!");
 			}
 	}
 	
@@ -47,7 +48,7 @@ public class DadosDAO {
 			bw.close();
 		}
 		catch(IOException e) {
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, e, "Erro", 0);
 		}
 	}
 	
@@ -190,6 +191,7 @@ public class DadosDAO {
 	}
 	
 	//conta a quantidade de dados presentes no arquivo
+	/*
 	public int ContarQuantidade(String nomeDoArquivo) throws IOException{
 		int contador = 0;
 		br = new BufferedReader(new FileReader("C:/Aps4Dados/"+nomeDoArquivo+".txt"));
@@ -202,7 +204,8 @@ public class DadosDAO {
 		br.close();
 		return contador;
 	}
-	
+	*/
+	//Retorna o Indice do objeto dentro do vetor dado
 	public int Indice(ArrayList<Dados> lista, Dados dado) {
 		return lista.indexOf(dado);
 	}

@@ -1,3 +1,6 @@
+package view;
+
+import control.ControlTela;
 
 public class CreateMenu extends TelaBase {
     
@@ -33,20 +36,20 @@ public class CreateMenu extends TelaBase {
         stateLabel.setText("Estado:");
 
         stateChoice.setFont(new java.awt.Font("Dialog", 0, 14));
-        stateChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acre", "Alagoas", "Amap·", "Amazonas", "Bahia", "Cear·", "EspÌrito Santo", "Goi·s", "Maranh„o", "Mato Grosso", "Mato Grosso do sul", "Minas Gerais", "Par·", "ParaÌba", "Paran·", "Pernambuco", "Piau·", "Rio de Janeiro", "Rio Grande do norte", "Rio Grande do sul", "RondÙnia", "Roraima", "Santa Catarina", "S„o Paulo", "Sergipe", "Tocantins", "Distrito Federal" }));
+        stateChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acre", "Alagoas", "Amap√°", "Amazonas", "Bahia", "Cear√°", "Esp√≠rito Santo", "Goi√°s", "Maranh√£o", "Mato Grosso", "Mato Grosso do sul", "Minas Gerais", "Par√°", "Para√≠ba", "Paran√°", "Pernambuco", "Piau√≠", "Rio de Janeiro", "Rio Grande do norte", "Rio Grande do sul", "Rond√¥nia", "Roraima", "Santa Catarina", "S√£o Paulo", "Sergipe", "Tocantins", "Distrito Federal" }));
 
         areaNameLabel.setFont(new java.awt.Font("Dialog", 0, 14)); 
-        areaNameLabel.setText("Nome da ·rea:");
+        areaNameLabel.setText("Nome da √°rea:");
 
         areaName.setFont(new java.awt.Font("Dialog", 0, 14)); 
 
         areaLabel.setFont(new java.awt.Font("Dialog", 0, 14)); 
-        areaLabel.setText("·rea total(km≤):");
+        areaLabel.setText("√Årea total(km¬≤):");
 
         area.setFont(new java.awt.Font("Dialog", 0, 14)); 
 
         defAreaLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-        defAreaLabel.setText("·rea desmatada este ano(km≤):");
+        defAreaLabel.setText("√Årea desmatada este ano(km¬≤):");
 
         defArea.setFont(new java.awt.Font("Dialog", 0, 14));
 
@@ -193,14 +196,16 @@ public class CreateMenu extends TelaBase {
         );
     }
       
-    private void createSaveActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void createSaveActionPerformed(java.awt.event.ActionEvent evt) { 
+    	if(Verifica()) {
+    		ctr.Insert(this);
+    	}
     }                                          
-
     
     private void createReturnActionPerformed(java.awt.event.ActionEvent evt) {
         cl.show(MainPanel, "Menu");
     }    
-      
+    private ControlTela ctr = new ControlTela();
     private javax.swing.JPanel CreateMenu;
     private javax.swing.JLabel addLabel;
     private javax.swing.JTextField area;
@@ -239,4 +244,15 @@ public class CreateMenu extends TelaBase {
     public String getPorReflo(){
         return porReflo.getText();
     }  
+    
+    public String getYear() {
+    	return year.getText();
+    }
+    
+    private boolean Verifica() {
+    	if(area.getText()!=null || defArea.getText()!= null || porIndus.getText()!=null || porReflo.getText()!=null || year.getText()!=null) {
+    		return true;
+    	}
+    	return false;
+    }
 }

@@ -1,5 +1,8 @@
+package view;
 
 import static java.lang.Integer.parseInt;
+
+import control.ControlTela;
 
 public class SearchMenu extends TelaBase{
     public SearchMenu(){
@@ -30,10 +33,10 @@ public class SearchMenu extends TelaBase{
 	        searchSelectActionPerformed(evt);}});
 	
 	infoLabel1.setFont(new java.awt.Font("Dialog", 1, 48)); 
-	infoLabel1.setText("Informações");
+	infoLabel1.setText("InformaÃ§Ãµes");
 	
 	searchChoice.setFont(new java.awt.Font("Dialog", 0, 14)); 
-	searchChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Estado", "Area total", "Area desmatada", "Porcentagem reflorestada", "Porcentagem usada industrialmente" }));
+	searchChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Nome", "Ano", "Data Atualizada", "Estado", "Area total", "Area desmatada", "Porcentagem reflorestada", "Porcentagem usada industrialmente" }));
 	
 	searchChosen.setFont(new java.awt.Font("Dialog", 0, 14));
 	
@@ -51,7 +54,7 @@ public class SearchMenu extends TelaBase{
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "id","Nome da área", "Ano da postagem", "Ultima vez atualizado", "Estado", "Area Total(km²)", "Area desmatada(km²)", "Porcentagem reflorestada", "Porcentagem usada industrialmente"
+                "id","Nome da Ã¡rea", "Ano da postagem", "Ultima vez atualizado", "Estado", "Area Total(kmÂ²)", "Area desmatada(kmÂ²)", "Porcentagem reflorestada", "Porcentagem usada industrialmente"
             }
         ) {
             Class[] types = new Class [] {
@@ -135,7 +138,7 @@ public class SearchMenu extends TelaBase{
     }                                            
 
     private void searchSelectActionPerformed(java.awt.event.ActionEvent evt){                                             
-        //Botão para selecionar uma informação para atualizar na parte com informações filtradas
+        //BotÃ£o para selecionar uma informaÃ§Ã£o para atualizar na parte com informaÃ§Ãµes filtradas
         int row = filteredTable.getSelectedRow();
         for(int i = 0; i <9;i++){
             int column = i;
@@ -183,9 +186,10 @@ public class SearchMenu extends TelaBase{
     }                                            
 
     private void filterActionPerformed(java.awt.event.ActionEvent evt) {                                       
-        //Botão para salvar a informação e utilizar para adicionar as informações a tabela
+        //BotÃ£o para salvar a informaÃ§Ã£o e utilizar para adicionar as informaÃ§Ãµes a tabela
+    	
     }
-      
+    private ControlTela ctr = new ControlTela();  
     private javax.swing.JPanel SearchMenu;
     private javax.swing.JScrollPane fScrollTable;
     private javax.swing.JButton filter;

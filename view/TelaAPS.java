@@ -1,6 +1,7 @@
-
+package view;
 
 import java.awt.CardLayout;
+import control.ControlTela;
 
 public class TelaAPS extends javax.swing.JFrame {
     CardLayout cl;
@@ -8,6 +9,7 @@ public class TelaAPS extends javax.swing.JFrame {
     TableMenu TM = new TableMenu();
     SearchMenu SM = new SearchMenu();
     UpdateMenu UM = new UpdateMenu();
+    ControlTela ctr = new ControlTela();
     
     public TelaAPS() {
         initComponents();
@@ -180,10 +182,12 @@ public class TelaAPS extends javax.swing.JFrame {
         
     }
     private void apagarActionPerformed(java.awt.event.ActionEvent evt) {                                       
-        
+        ctr.Delete(this);
     }
     private void createArchiveActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        
+        if(archiveName.getText()!=null) {
+        	ctr.Create(this);
+        }
     }
     private void chooseArchiveActionPerformed(java.awt.event.ActionEvent evt) {                                              
        
@@ -194,6 +198,10 @@ public class TelaAPS extends javax.swing.JFrame {
             public void run() {
                 new TelaAPS().setVisible(true);}});}
    
+   public String getArchiveName() { 
+	   return archiveName.getText();
+   }
+    
     private javax.swing.JPanel MainPanel;
     private javax.swing.JPanel Menu;
     private javax.swing.JButton apagar;

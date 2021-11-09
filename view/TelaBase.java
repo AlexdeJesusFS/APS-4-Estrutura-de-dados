@@ -1,5 +1,4 @@
-
-
+package view;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -29,6 +28,8 @@ public class TelaBase extends javax.swing.JPanel {
         TelaBase.MainPanel = Main;
     }
     
-    
+    public int getID() {
+    	return id;
+    }
     
 }

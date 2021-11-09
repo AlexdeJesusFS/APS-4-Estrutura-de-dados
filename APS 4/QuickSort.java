@@ -1,50 +1,48 @@
 package APS;
 
+import java.util.ArrayList;
+
+import model.Dados;
+
 public class QuickSort {   
-
-    /*
-    public void particiona(int[] vetor) {
-        pivo = (int) (vetor[0] + vetor[vetor.length -1]) / 2;
-        
-        for (int i = 0; i < vetor.length; i++) {
-            for (int j = vetor.length-1; j > vetor.length; j++) {
-                if (vetor[i] >= pivo && vetor[j] <= pivo) {
-                    //troca de posição i com j
-                    int aux = vetor[j];
-                    vetor[j] = vetor[i];
-                    vetor[i] = vetor[j];
-                }
-            }
-            
-        }
-    }*/ 
-
-    public int particao(int[] vetor, int esquerda, int direita) {
-        int meio = (int) (esquerda + direita) / 2;
-        int pivo = vetor[meio];
-        int i = esquerda - 1;
-        int j = direita + 1;
-        while (true) {
-            do {
-                i++;
-            } while (vetor[i] < pivo);
-            do {
-                j--;
-            } while (vetor[j] > pivo);
-            if (i >= j) {
-                return j;
-            }
-            int aux = vetor[i];
-            vetor[i] = vetor[j];
-            vetor[j] = aux;
-        }
-    }
+	
+	public ArrayList<Dados> quickSort(ArrayList<Dados> lista, int inicio, int fim){
+		ArrayList<Dados> resultado = lista;
+		if(inicio<fim) {
+			int posicaoPivo = separar(resultado, inicio, fim);
+			quickSort(resultado, inicio, posicaoPivo-1);
+			quickSort(resultado, posicaoPivo+1, fim);
+		}
+		return resultado;
+	}
+	
+	public int separar(ArrayList<Dados>lista, int inicio, int fim) {
+		Dados pivo = lista.get(inicio);
+		int i = inicio +1, f = fim;
+		while(i<=f) {
+			if(Compara(lista.get(i).getAno(), pivo.getAno())) {
+				i++;
+			}
+			else if(Compara(pivo.getAno(), lista.get(f).getAno())) {
+				f--;
+			}
+			else {
+				Dados troca = lista.get(i);
+				lista.set(i, lista.get(f));
+				lista.set(f, troca);
+				i++;
+				f--;
+			}
+		}
+		lista.set(inicio, lista.get(f));
+		lista.set(f, pivo);
+		return f;
+	}
     
-    public void ordenar(int[] vetor, int esquerda, int direita) {
-        if (esquerda < direita) {
-            int p = particao(vetor, esquerda, direita);
-            ordenar(vetor, esquerda, p);
-            ordenar(vetor, p + 1, direita);
-        }
+    public boolean Compara(String primeira, String segunda) {
+    	if(primeira.compareToIgnoreCase(segunda)<=0) {
+    		return true;
+    	}else
+    		return false;
     }
 }

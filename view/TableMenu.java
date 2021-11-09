@@ -1,4 +1,4 @@
-
+package view;
 
 import static java.lang.Integer.parseInt;
 
@@ -28,7 +28,7 @@ public class TableMenu extends TelaBase {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "id","Nome da ·rea", "Ano da postagem", "Ultima vez atualizado", "Estado", "Area Total(km≤)", "Area desmatada(km≤)", "Porcentagem reflorestada", "Porcentagem usada industrialmente"
+                "id","Nome da √Årea", "Ano da postagem", "Ultima vez atualizado", "Estado", "Area Total(km¬≤)", "Area desmatada(km2)", "Porcentagem reflorestada", "Porcentagem usada industrialmente"
             }
         ) {
             Class[] types = new Class [] {
@@ -51,7 +51,7 @@ public class TableMenu extends TelaBase {
         tableScroll.setViewportView(table);
 	
 	        infoLabel.setFont(new java.awt.Font("Dialog", 1, 48)); 
-	        infoLabel.setText("InformaÁıes");
+	        infoLabel.setText("Informa√ß√µes");
 	
 	        infoReturn.setFont(new java.awt.Font("Dialog", 0, 14)); 
 	        infoReturn.setText("VOLTAR");
@@ -123,7 +123,7 @@ public class TableMenu extends TelaBase {
     }                                          
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {                                       
-        //Bot„o para selecionar uma informaÁ„o para atualizar na parte com todas informaÁıes
+        //Bot√£o para selecionar uma informa√ß√£o para atualizar na parte com todas informa√ß√µes
         int row = table.getSelectedRow();
         for(int i = 0; i <9;i++){
             switch(i){
