@@ -23,7 +23,7 @@ public class DadosDAO {
 				JOptionPane.showMessageDialog(null,"Arquivo "+arquivo.getName()+" Criado com sucesso!");
 			}
 			else {
-				JOptionPane.showMessageDialog(null,"Arquivo já existe!");
+				//JOptionPane.showMessageDialog(null,"Arquivo já existe!");
 			}
 	}
 	

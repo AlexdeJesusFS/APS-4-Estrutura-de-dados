@@ -179,7 +179,7 @@ public class TelaAPS extends javax.swing.JFrame {
         cl.show(MainPanel, "SearchMenu");
     }           
     private void sortActionPerformed(java.awt.event.ActionEvent evt) {                                     
-        
+        ctr.QuickSort();
     }
     private void apagarActionPerformed(java.awt.event.ActionEvent evt) {                                       
         ctr.Delete(this);
@@ -201,7 +201,7 @@ public class TelaAPS extends javax.swing.JFrame {
    public String getArchiveName() { 
 	   return archiveName.getText();
    }
-    
+   
     private javax.swing.JPanel MainPanel;
     private javax.swing.JPanel Menu;
     private javax.swing.JButton apagar;

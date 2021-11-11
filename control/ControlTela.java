@@ -5,7 +5,10 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import APS.QuickSort;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import APS.Sort;
 import model.Dados;
 import model.DadosDAO;
 import view.CreateMenu;
@@ -15,8 +18,10 @@ import view.TelaAPS;
 import view.UpdateMenu;
 
 public class ControlTela {
+	static Logger log = LogManager.getLogger(ControlTela.class);
 	DadosDAO mng = new DadosDAO();
-	QuickSort qk = new QuickSort();
+	Sort sort = new Sort();
+	
 	public void Create(TelaAPS tela) {
 		try { 	
 			mng.CriarArquivo("entrada");
@@ -114,7 +119,10 @@ public class ControlTela {
 	public void QuickSort() {
 		try {
 			ArrayList<Dados> lista = mng.LerArquivo("entrada");
-			lista  = qk.quickSort(lista, 0, lista.size()-1);
+			log.info("Inicio do QuickSort com "+ lista.size() + " objetos.");
+			sort.quickSort(lista, 0, lista.size()-1);
+			log.info("Termino do QuickSort com "+ lista.size() + " objetos.");
+			mng.CriarArquivo("QuickSort");
 			mng.EscreverArquivo(lista, "QuickSort");
 		}catch(IOException e) {
 			show(e);
@@ -122,14 +130,16 @@ public class ControlTela {
 	}
 	
 	public void MergeSort() {
-		//Mesmo conceito do QuickSort porém com o Merge
-		/*
 		try {
-			
+			ArrayList<Dados> lista = mng.LerArquivo("entrada");
+			log.info("Inicio do MergeSort com "+ lista.size() + " objetos.");
+			sort.mergeSort(lista, lista.size()-1);
+			log.info("Termino do MergeSort com "+ lista.size() + " objetos.");
+			mng.CriarArquivo("MergeSort");
+			mng.EscreverArquivo(lista, "MergeSort");
 		}catch(IOException e) {
 			show(e);
 		}
-		*/
 	}
 	
 	private void show(IOException e) {

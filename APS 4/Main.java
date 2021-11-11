@@ -1,5 +1,5 @@
 
-package APS;
+package APS 4;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,22 +15,25 @@ public class Main {
     	Random rnd = new Random();
     	DadosDAO dados = new DadosDAO();
     	ArrayList<Dados> lista = new ArrayList<Dados>();
-    	QuickSort qk = new QuickSort();
+    	Sort sort = new Sort();
     	
-    	
-        for(int i = 0; i < 999; i++) {
-        	Dados info = new Dados("a","a",20.0,30.0,40.0,50.0);
+        for(int i = 0; i < 1000; i++) {
+        	Dados info = new Dados(Integer.toString(rnd.nextInt(10)),"a",20.0,30.0,40.0,50.0);
         	info.setDataAtualiz("a");
         	lista.add(info);
         }
     	
         try {
-        	dados.CriarArquivo("teste");
-        	dados.EscreverArquivo(lista, "teste");
+        	dados.CriarArquivo("entrada");
+        	dados.EscreverArquivo(lista, "entrada");
         	
-        	//lista = qk.quickSort(lista, 0, lista.size()-1);
-        	//dados.CriarArquivo("QuickSort");
-        	//dados.EscreverArquivo(lista, "QuickSort");
+        	lista = dados.LerArquivo("entrada");
+        	//System.out.println(lista.size());
+        	//sort.mergeSort(lista, lista.size());
+        	//dados.EscreverArquivo(lista, "MergeSort");
+        	sort.quickSort(lista, 0, lista.size()-1);
+        	dados.CriarArquivo("QuickSort");
+        	dados.EscreverArquivo(lista, "QuickSort");
         }catch(IOException e) {
         	System.out.println(e);
         }
