@@ -32,13 +32,13 @@ public class ControlTela {
 	
 	public void Insert(CreateMenu tela) {
 		Dados insert = new Dados();
-		insert.setAno(tela.getYear());
+		insert.setAno(tela.getYearPosted());
 		insert.setSiglaEstado(tela.getStateChoice());
 		insert.setAreaTotal(Double.parseDouble(tela.getArea()));
 		insert.setAreaDesmatadaAno(Double.parseDouble(tela.getAreaDesm()));
 		insert.setIndReflorestamento(Double.parseDouble(tela.getPorReflo()));
 		insert.setIndIndustrial(Double.parseDouble(tela.getPorIndus()));
-		insert.setDataAtualiz("Inserir aqui a data Atualizada");
+		insert.setDataAtualiz(tela.getDataPostada());
 		mng.EscreverArquivo(insert, "entrada");
 	}
 	
@@ -53,13 +53,13 @@ public class ControlTela {
 	
 	public void Update(UpdateMenu tela) {
 		Dados dado = new Dados();
-		dado.setAno("");
+		dado.setAno(tela.getYearPosted());
 		dado.setSiglaEstado(tela.getStateChoice());
 		dado.setAreaTotal(Double.parseDouble(tela.getArea()));
 		dado.setAreaDesmatadaAno(Double.parseDouble(tela.getAreaDesm()));
 		dado.setIndReflorestamento(Double.parseDouble(tela.getPorReflo()));
 		dado.setIndIndustrial(Double.parseDouble(tela.getPorIndus()));
-		dado.setDataAtualiz("Inserir aqui a data Atualizada");
+		dado.setDataAtualiz(tela.getDataPostada());
 		try {
 			ArrayList<Dados> lista = mng.LerArquivo("entrada");
 			mng.Update(tela.getID(), dado, lista, "entrada");

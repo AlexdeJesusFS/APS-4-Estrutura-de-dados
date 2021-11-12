@@ -1,8 +1,5 @@
 package view;
-
 import static java.lang.Integer.parseInt;
-
-import control.ControlTela;
 
 public class SearchMenu extends TelaBase{
     public SearchMenu(){
@@ -36,7 +33,7 @@ public class SearchMenu extends TelaBase{
 	infoLabel1.setText("Informações");
 	
 	searchChoice.setFont(new java.awt.Font("Dialog", 0, 14)); 
-	searchChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Nome", "Ano", "Data Atualizada", "Estado", "Area total", "Area desmatada", "Porcentagem reflorestada", "Porcentagem usada industrialmente" }));
+	searchChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ano", "Estado", "Area total", "Area desmatada", "Porcentagem reflorestada", "Porcentagem usada industrialmente" }));
 	
 	searchChosen.setFont(new java.awt.Font("Dialog", 0, 14));
 	
@@ -48,20 +45,20 @@ public class SearchMenu extends TelaBase{
 	
 	filteredTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {1, "nome", "data", "atu", "Bahia", "areat", "aread", "porr", "pori"},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "id","Nome da área", "Ano da postagem", "Ultima vez atualizado", "Estado", "Area Total(km²)", "Area desmatada(km²)", "Porcentagem reflorestada", "Porcentagem usada industrialmente"
+                "id", "Ano da coleta de dados", "Ultima vez atualizado", "Estado", "Area Total(km²)", "Area desmatada(km²)", "Porcentagem reflorestada", "Porcentagem usada industrialmente"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -140,42 +137,37 @@ public class SearchMenu extends TelaBase{
     private void searchSelectActionPerformed(java.awt.event.ActionEvent evt){                                             
         //Botão para selecionar uma informação para atualizar na parte com informações filtradas
         int row = filteredTable.getSelectedRow();
-        for(int i = 0; i <9;i++){
-            int column = i;
+        for(int i = 0; i <8;i++){
             switch(i){
                 case 0:
                     int g = parseInt(filteredTable.getModel().getValueAt(row, i).toString());
                     TelaBase.id = g;
                     break;
                 case 1:
-                    String nome = filteredTable.getModel().getValueAt(row, i).toString();
-                    TelaBase.nome = nome;
-                    break;
-                case 2:
                     String ano = filteredTable.getModel().getValueAt(row, i).toString();
                     TelaBase.ano = ano;
                     break;
-                case 3:
+                case 2:
                     String atualizada = filteredTable.getModel().getValueAt(row, i).toString();
                     TelaBase.atualizada = atualizada;
                     break;
-                case 4:
+                case 3:
                     String estado = filteredTable.getModel().getValueAt(row, i).toString();
                     TelaBase.estado = estado;
                     break;
-                case 5:
+                case 4:
                     String areatotal = filteredTable.getModel().getValueAt(row, i).toString();
                     TelaBase.areaTo = areatotal;
                     break;
-                case 6:
+                case 5:
                     String areades = filteredTable.getModel().getValueAt(row, i).toString();
                     TelaBase.areaDes = areades;
                     break;
-                case 7:
+                case 6:
                     String porref = filteredTable.getModel().getValueAt(row, i).toString();
                     TelaBase.porRef = porref;
                     break;
-                case 8:
+                case 7:
                     String porind = filteredTable.getModel().getValueAt(row, i).toString();
                     TelaBase.porInd = porind;
                     break;
@@ -187,9 +179,8 @@ public class SearchMenu extends TelaBase{
 
     private void filterActionPerformed(java.awt.event.ActionEvent evt) {                                       
         //Botão para salvar a informação e utilizar para adicionar as informações a tabela
-    	
     }
-    private ControlTela ctr = new ControlTela();  
+      
     private javax.swing.JPanel SearchMenu;
     private javax.swing.JScrollPane fScrollTable;
     private javax.swing.JButton filter;

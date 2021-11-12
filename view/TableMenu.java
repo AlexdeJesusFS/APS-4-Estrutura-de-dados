@@ -3,6 +3,8 @@ package view;
 import static java.lang.Integer.parseInt;
 
 public class TableMenu extends TelaBase {
+	
+	
     public TableMenu() {
         initComponents();} 
     
@@ -13,29 +15,32 @@ public class TableMenu extends TelaBase {
 	infoLabel = new javax.swing.JLabel();
 	infoReturn = new javax.swing.JButton();
 	select = new javax.swing.JButton();
+        archiveSelected = new javax.swing.JComboBox<>();
+        listAddInfo = new javax.swing.JButton();
+        archiveLabel = new javax.swing.JLabel();
 	       
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "id","Nome da Área", "Ano da postagem", "Ultima vez atualizado", "Estado", "Area Total(km²)", "Area desmatada(km2)", "Porcentagem reflorestada", "Porcentagem usada industrialmente"
+                "id", "Ano da coleta dos dados", "Ultima vez atualizado", "Estado", "Area Total(km²)", "Area desmatada(km²)", "Porcentagem reflorestada", "Porcentagem usada industrialmente"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -68,6 +73,20 @@ public class TableMenu extends TelaBase {
 	                selectActionPerformed(evt);
 	            }
 	        });
+                
+                archiveSelected.setFont(new java.awt.Font("Dialog", 0, 14)); 
+                archiveSelected.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "entrada", "QuickSort", "MergeSort"}));
+
+                listAddInfo.setFont(new java.awt.Font("Dialog", 0, 14)); 
+                listAddInfo.setText("SELECIONAR");
+                listAddInfo.addActionListener(new java.awt.event.ActionListener() {
+    	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+    	                listAddInfoActionPerformed(evt);
+    	            }
+    	        });
+
+                archiveLabel.setFont(new java.awt.Font("Dialog", 0, 14)); 
+                archiveLabel.setText("Arquivo:");
 	
 	        javax.swing.GroupLayout TableMenuLayout = new javax.swing.GroupLayout(TableMenu);
 	        TableMenu.setLayout(TableMenuLayout);
@@ -82,13 +101,25 @@ public class TableMenu extends TelaBase {
 	                .addComponent(infoReturn)
 	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 	                .addComponent(select))
+                    .addGroup(TableMenuLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(archiveLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(archiveSelected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(listAddInfo)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 	        );
 	        TableMenuLayout.setVerticalGroup(
 	            TableMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableMenuLayout.createSequentialGroup()
 	                .addGap(36, 36, 36)
 	                .addComponent(infoLabel)
-	                .addGap(35, 35, 35)
+	                .addGap(5, 5, 5)
+                        .addGroup(TableMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(archiveSelected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(listAddInfo)
+                            .addComponent(archiveLabel))
 	                .addComponent(tableScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
 	                .addGap(18, 18, 18)
 	                .addGroup(TableMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -120,46 +151,46 @@ public class TableMenu extends TelaBase {
     
     private void infoReturnActionPerformed(java.awt.event.ActionEvent evt) {
         cl.show(MainPanel, "Menu");
-    }                                          
+    }
+    private void listAddInfoActionPerformed(java.awt.event.ActionEvent evt) {
+    	this.setArchiveName(archiveSelected.getItemAt(archiveSelected.getSelectedIndex()));
+        
+    }
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {                                       
         //Botão para selecionar uma informação para atualizar na parte com todas informações
         int row = table.getSelectedRow();
-        for(int i = 0; i <9;i++){
+        for(int i = 0; i <8;i++){
             switch(i){
                 case 0:
                     int id = parseInt(table.getModel().getValueAt(row, i).toString());
                     TelaBase.id = id;
                     break;
                 case 1:
-                    String nome = table.getModel().getValueAt(row, i).toString();
-                    TelaBase.nome = nome;
-                    break;
-                case 2:
                     String ano = table.getModel().getValueAt(row, i).toString();
                     TelaBase.ano = ano;
                     break;
-                case 3:
+                case 2:
                     String atualizada = table.getModel().getValueAt(row, i).toString();
                     TelaBase.atualizada = atualizada;
                     break;
-                case 4:
+                case 3:
                     String estado = table.getModel().getValueAt(row, i).toString();
                     TelaBase.estado = estado;
                     break;
-                case 5:
+                case 4:
                     String areatotal = table.getModel().getValueAt(row, i).toString();
                     TelaBase.areaTo = areatotal;
                     break;
-                case 6:
+                case 5:
                     String areades = table.getModel().getValueAt(row, i).toString();
                     TelaBase.areaDes = areades;
                     break;
-                case 7:
+                case 6:
                     String porref = table.getModel().getValueAt(row, i).toString();
                     TelaBase.porRef = porref;
                     break;
-                case 8:
+                case 7:
                     String porind = table.getModel().getValueAt(row, i).toString();
                     TelaBase.porInd = porind;
                     break;
@@ -175,4 +206,7 @@ public class TableMenu extends TelaBase {
     private javax.swing.JButton select;
     private javax.swing.JTable table;
     private javax.swing.JScrollPane tableScroll;
+    private javax.swing.JLabel archiveLabel;
+    private javax.swing.JComboBox<String> archiveSelected;
+    private javax.swing.JButton listAddInfo;
 }

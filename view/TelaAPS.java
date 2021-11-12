@@ -1,7 +1,7 @@
 package view;
 
 import java.awt.CardLayout;
-import control.ControlTela;
+//import control.ControlTela;
 
 public class TelaAPS extends javax.swing.JFrame {
     CardLayout cl;
@@ -22,10 +22,11 @@ public class TelaAPS extends javax.swing.JFrame {
         menuLabel = new javax.swing.JLabel();
         create = new javax.swing.JButton();
         apagar = new javax.swing.JButton();
-        archiveName = new javax.swing.JTextField();
-        archiveLabel = new javax.swing.JLabel();
+        QuickSort = new javax.swing.JButton();
+        MergeSort = new javax.swing.JButton();
+       
         createArchive = new javax.swing.JButton();
-        chooseArchive = new javax.swing.JButton();
+        
         openList = new javax.swing.JButton();
         search = new javax.swing.JButton();
         sort = new javax.swing.JButton();
@@ -38,7 +39,7 @@ public class TelaAPS extends javax.swing.JFrame {
         menuLabel.setText("Menu");
 
         create.setFont(new java.awt.Font("Dialog", 0, 14)); 
-        create.setText("CREATE");
+        create.setText("ADICIONAR DADO");
         create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createActionPerformed(evt);
@@ -46,7 +47,7 @@ public class TelaAPS extends javax.swing.JFrame {
         });
 	
         apagar.setFont(new java.awt.Font("Dialog", 0, 14));
-        apagar.setText("DELETE");
+        apagar.setText("DELETAR ARQUIVO");
         apagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 apagarActionPerformed(evt);
@@ -54,7 +55,7 @@ public class TelaAPS extends javax.swing.JFrame {
         });
 
         openList.setFont(new java.awt.Font("Dialog", 0, 14)); 
-        openList.setText("LIST");
+        openList.setText("LISTA DE DADOS");
         openList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openListActionPerformed(evt);
@@ -62,40 +63,46 @@ public class TelaAPS extends javax.swing.JFrame {
         });
 
         search.setFont(new java.awt.Font("Dialog", 0, 14));
-        search.setText("SEARCH");
+        search.setText("PESQUISAR DADOS");
         search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchActionPerformed(evt);
             }
         });
-        sort.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        sort.setFont(new java.awt.Font("Dialog", 0, 14));
         sort.setText("ORGANIZAR");
         sort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sortActionPerformed(evt);
             }
         });
-        
-        archiveName.setFont(new java.awt.Font("Dialog", 0, 14));
-        
-        archiveLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-        archiveLabel.setText("Digite o nome do arquivo:");
+      
         
         createArchive.setFont(new java.awt.Font("Dialog", 0, 14));
-        createArchive.setText("CRIAR");
+        createArchive.setText("CRIAR ARQUIVO");
         createArchive.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createArchiveActionPerformed(evt);
             }
         });
-
-        chooseArchive.setFont(new java.awt.Font("Dialog", 0, 14));
-        chooseArchive.setText("ESCOLHER");
-        chooseArchive.addActionListener(new java.awt.event.ActionListener() {
+        
+        QuickSort.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        QuickSort.setText("QuickSort");
+        QuickSort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chooseArchiveActionPerformed(evt);
+                QuickSortActionPerformed(evt);
             }
         });
+
+        MergeSort.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        MergeSort.setText("MergeSort");
+        MergeSort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MergeSortActionPerformed(evt);
+            }
+        });
+
+      
 
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
@@ -114,14 +121,12 @@ public class TelaAPS extends javax.swing.JFrame {
             .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(MenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(archiveLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(archiveName, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(createArchive)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chooseArchive)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(QuickSort)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(MergeSort)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,10 +135,9 @@ public class TelaAPS extends javax.swing.JFrame {
                 .addComponent(menuLabel)
                 .addGap(29, 29, 29)
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(archiveLabel)
-                    .addComponent(archiveName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(createArchive, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addComponent(chooseArchive))
+                    .addComponent(QuickSort, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(MergeSort, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(create, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -175,32 +179,36 @@ public class TelaAPS extends javax.swing.JFrame {
         cl.show(MainPanel, "TableMenu");
     }                                        
 
-    private void searchActionPerformed(java.awt.event.ActionEvent evt) {                                       
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {  
+    	SM.setArchiveName("entrada");
         cl.show(MainPanel, "SearchMenu");
     }           
     private void sortActionPerformed(java.awt.event.ActionEvent evt) {                                     
-        ctr.QuickSort();
+       ctr.QuickSort();
     }
     private void apagarActionPerformed(java.awt.event.ActionEvent evt) {                                       
-        ctr.Delete(this);
+      ctr.Delete(this);
     }
     private void createArchiveActionPerformed(java.awt.event.ActionEvent evt) {                                              
         if(archiveName.getText()!=null) {
-        	ctr.Create(this);
-        }
+        	ctr.Create(this);}
     }
-    private void chooseArchiveActionPerformed(java.awt.event.ActionEvent evt) {                                              
-       
-    }
+    private void QuickSortActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        
+    }                                         
+
+    private void MergeSortActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        
+    }       
+  
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaAPS().setVisible(true);}});}
    
-   public String getArchiveName() { 
-	   return archiveName.getText();
-   }
+  public String getArchiveName() { 
+	  return archiveName.getText();}
    
     private javax.swing.JPanel MainPanel;
     private javax.swing.JPanel Menu;
@@ -209,9 +217,8 @@ public class TelaAPS extends javax.swing.JFrame {
     private javax.swing.JLabel menuLabel;
     private javax.swing.JButton openList;
     private javax.swing.JButton search; 
-    private javax.swing.JLabel archiveLabel;
-    private javax.swing.JTextField archiveName;
-    private javax.swing.JButton chooseArchive;
     private javax.swing.JButton createArchive;
     private javax.swing.JButton sort;
+    private javax.swing.JButton MergeSort;
+    private javax.swing.JButton QuickSort;
 }

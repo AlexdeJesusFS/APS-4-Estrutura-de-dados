@@ -1,6 +1,16 @@
 package view;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
 public class UpdateMenu extends TelaBase{
+    private static Date date = new Date();
+    private static LocalDate localDate;
+    private static int year;
+    private static int month;
+    private static int day;
+    private String dataPost;
     
     public UpdateMenu(){
         initComponents();
@@ -11,12 +21,12 @@ public class UpdateMenu extends TelaBase{
         updateLabel = new javax.swing.JLabel();
         stateLabel = new javax.swing.JLabel();
         updateStateChoice = new javax.swing.JComboBox<>();
-        areaNameLabel = new javax.swing.JLabel();
-        updateAreaName = new javax.swing.JTextField();
+        yearPostedLabel = new javax.swing.JLabel();
+        updateYear = new javax.swing.JLabel();
         areaLabel = new javax.swing.JLabel();
         updateArea = new javax.swing.JTextField();
-        defAreaLabel = new javax.swing.JLabel();
-        updateDefArea = new javax.swing.JTextField();
+        desmAreaLabel = new javax.swing.JLabel();
+        updateAreaDesm = new javax.swing.JTextField();
         porRefloLabel = new javax.swing.JLabel();
         updatePorReflo = new javax.swing.JTextField();
         porIndusLabel = new javax.swing.JLabel();
@@ -34,20 +44,20 @@ public class UpdateMenu extends TelaBase{
         updateStateChoice.setFont(new java.awt.Font("Dialog", 0, 14));
         updateStateChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do norte", "Rio Grande do sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins", "Distrito Federal" }));
 
-        areaNameLabel.setFont(new java.awt.Font("Dialog", 0, 14)); 
-        areaNameLabel.setText("Nome da Área:");
+        yearPostedLabel.setFont(new java.awt.Font("Dialog", 0, 14)); 
+        yearPostedLabel.setText("Ano em que a coleta de dados foi realizada:");
 
-        updateAreaName.setFont(new java.awt.Font("Dialog", 0, 14)); 
+        updateYear.setFont(new java.awt.Font("Dialog", 0, 14)); 
 
         areaLabel.setFont(new java.awt.Font("Dialog", 0, 14)); 
         areaLabel.setText("Área total(km²):");
 
         updateArea.setFont(new java.awt.Font("Dialog", 0, 14)); 
 
-        defAreaLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-        defAreaLabel.setText("Área desmatada este ano(km²):");
+        desmAreaLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+        desmAreaLabel.setText("Área desmatada este ano(km²):");
 
-        updateDefArea.setFont(new java.awt.Font("Dialog", 0, 14));
+        updateAreaDesm.setFont(new java.awt.Font("Dialog", 0, 14));
 
         porRefloLabel.setFont(new java.awt.Font("Dialog", 0, 14)); 
         porRefloLabel.setText("Porcentagem anual de reflorestamento:");
@@ -104,17 +114,17 @@ public class UpdateMenu extends TelaBase{
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(updatePorIndus))
                             .addGroup(CreateMenuLayout.createSequentialGroup()
-                                .addComponent(defAreaLabel)
+                                .addComponent(desmAreaLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(updateDefArea))
+                                .addComponent(updateAreaDesm))
                             .addGroup(CreateMenuLayout.createSequentialGroup()
                                 .addComponent(areaLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(updateArea))
                             .addGroup(CreateMenuLayout.createSequentialGroup()
-                                .addComponent(areaNameLabel)
+                                .addComponent(yearPostedLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(updateAreaName))))
+                                .addComponent(updateYear))))
                     .addGroup(CreateMenuLayout.createSequentialGroup()
                         .addComponent(updateReturn)
                         .addGap(303, 303, 303)
@@ -140,16 +150,16 @@ public class UpdateMenu extends TelaBase{
                     .addComponent(updateStateChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(CreateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(areaNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(updateAreaName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(yearPostedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(CreateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(areaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(updateArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(CreateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(defAreaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(updateDefArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(desmAreaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateAreaDesm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(CreateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updatePorReflo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,7 +202,7 @@ public class UpdateMenu extends TelaBase{
       
     private void createSaveActionPerformed(java.awt.event.ActionEvent evt) {          
     	adicionarInfo.setVisible(true);
-    	
+    	updateSave.setVisible(false);
     }                                          
 
     
@@ -203,7 +213,12 @@ public class UpdateMenu extends TelaBase{
         adicionarInfo.setVisible(false);
         updateSave.setVisible(true);
         this.setStateChoice(TelaBase.estado);
-        this.setAreaName(TelaBase.nome);
+        this.setYearPosted(TelaBase.ano);
+        localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            year = localDate.getYear();
+            month = localDate.getMonthValue();
+            day = localDate.getDayOfMonth();
+            dataPost = year+"/"+month+"/"+day;
         this.setArea(TelaBase.areaTo);
         this.setAreaDesm(TelaBase.areaDes);
         this.setPorIndus(TelaBase.porInd);
@@ -215,12 +230,12 @@ public class UpdateMenu extends TelaBase{
     private javax.swing.JButton adicionarInfo;
     private javax.swing.JTextField updateArea;
     private javax.swing.JLabel areaLabel;
-    private javax.swing.JTextField updateAreaName;
-    private javax.swing.JLabel areaNameLabel;
+    private javax.swing.JLabel updateYear;
+    private javax.swing.JLabel yearPostedLabel;
     private javax.swing.JButton updateReturn;
     private javax.swing.JButton updateSave;
-    private javax.swing.JTextField updateDefArea;
-    private javax.swing.JLabel defAreaLabel;
+    private javax.swing.JTextField updateAreaDesm;
+    private javax.swing.JLabel desmAreaLabel;
     private javax.swing.JTextField updatePorIndus;
     private javax.swing.JLabel porIndusLabel;
     private javax.swing.JTextField updatePorReflo;
@@ -235,31 +250,25 @@ public class UpdateMenu extends TelaBase{
     public void setStateChoice(String estado){
         updateStateChoice.setSelectedItem(estado);
     }
-    
-    public String getAreaName(){
-        return updateAreaName.getText();
+    public void setYearPosted(String year){
+        updateYear.setText(year);
     }
-    public void setAreaName(String nome){
-        updateAreaName.setText(nome);
-    }
+    public String getYearPosted(){
+        return updateYear.getText();}
     
     public String getArea(){
-        return updateAreaName.getText();
+        return updateArea.getText();
     }
     public void setArea(String area){
         updateArea.setText(area);
-    }
-    
+    }  
     public String getAreaDesm(){
-        return updateDefArea.getText();
+        return updateAreaDesm.getText();
     }
     public void setAreaDesm(String aread){
-    	//renomear esse objeto abaixo
-        updateDefArea.setText(aread);
+        updateAreaDesm.setText(aread);
     }
-    
     public String getPorIndus(){
-    	//renomear esse objeto abaixo
         return updatePorIndus.getText();
     }
     public void setPorIndus(String porInd){
@@ -270,5 +279,8 @@ public class UpdateMenu extends TelaBase{
     }  
     public void setPorReflo(String porRef){
         updatePorReflo.setText(porRef);
+    }
+    public String getDataPostada(){
+        return dataPost;
     }
 }
