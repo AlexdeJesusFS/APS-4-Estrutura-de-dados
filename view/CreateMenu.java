@@ -219,6 +219,7 @@ public class CreateMenu extends TelaBase {
             day = localDate.getDayOfMonth();
             dataPost = year+"/"+month+"/"+day;
     		ctr.Insert(this);
+    		
         }
     }                                          
     

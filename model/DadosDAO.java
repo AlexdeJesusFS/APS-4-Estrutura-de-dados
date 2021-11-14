@@ -16,31 +16,29 @@ public class DadosDAO {
 	
 	//Metodos
 	//Caso não exista cria o arquivo que será salvo os dados.
-	public void CriarArquivo(String nomeDoArquivo) throws IOException{  
-			arquivo = new File("C:/Aps4Dados/"+nomeDoArquivo+".txt");
+	public void CriarArquivo(String nome_do_Arquivo) throws IOException{  
+			arquivo = new File("C:/Aps4Dados/"+nome_do_Arquivo+".txt");
 			arquivo.getParentFile().mkdir();
 			if(arquivo.createNewFile()) {
 				JOptionPane.showMessageDialog(null,"Arquivo "+arquivo.getName()+" Criado com sucesso!");
-			}
-			else {
-				//JOptionPane.showMessageDialog(null,"Arquivo já existe!");
 			}
 	}
 	
 	//Metodos de Manipulação de Dados
 	
 	//Escreve no final do arquivo os dados adicionados
-	public void EscreverArquivo(Dados dado, String nomeDoArquivo) { 
+	public void EscreverArquivo(Dados dado, String nome_do_Arquivo) { 
 		try {
-			arquivo = new File("C:/Aps4Dados/"+nomeDoArquivo+".txt");
+			arquivo = new File("C:/Aps4Dados/"+nome_do_Arquivo+".txt");
 			if(arquivo.isFile()) {
-				boolean verificador = ChecaArquivo(nomeDoArquivo);
+				boolean verificador = ChecaArquivo(nome_do_Arquivo);
 				bw = new BufferedWriter(new FileWriter(arquivo,true));
 				if(!verificador) {
 					bw.write("--Inicio--\n");	
 				}
 				bw.write(dado.getAno()+"\n");
-				bw.write(dado.getDataAtualiz()+"\n");
+				bw.write(dado.getMes()+"\n");
+				bw.write(dado.getDataAtualizada()+"\n");
 				bw.write(dado.getEstado()+"\n");
 				bw.write(dado.StringAreaTotal()+"\n");
 				bw.write(dado.StringAreaDesmatada()+"\n");
@@ -49,7 +47,7 @@ public class DadosDAO {
 				bw.write("--count--\n");
 				bw.close();
 			}else {
-				semArquivo();
+				semArquivo(nome_do_Arquivo);
 			}
 		}
 		catch(IOException e) {
@@ -58,20 +56,20 @@ public class DadosDAO {
 	}
 	
 	//Sobrescreve o arquivo existente com os dados da Arraylist
-	public void EscreverArquivo(ArrayList<Dados> informacao, String nomeDoArquivo) throws IOException{ 
-		arquivo = new File("C:/Aps4Dados/"+nomeDoArquivo+".txt");
+	public void EscreverArquivo(ArrayList<Dados> informacao, String nome_do_Arquivo) throws IOException{ 
+		arquivo = new File("C:/Aps4Dados/"+nome_do_Arquivo+".txt");
 		if(arquivo.isFile()) {
 			bw = new BufferedWriter(new FileWriter(arquivo,false));
 			bw.write("");
-			informacao.forEach((dado) -> EscreverArquivo(dado,nomeDoArquivo));
+			informacao.forEach((dado) -> EscreverArquivo(dado,nome_do_Arquivo));
 		} else {
-			semArquivo();
+			semArquivo(nome_do_Arquivo);
 		}
 	}
 	
 	//Lê o arquivo completo e retorna todos os valores para uma Arraylist
-	public ArrayList<Dados> LerArquivo(String nomeDoArquivo) throws IOException{
-		arquivo = new File("C:/Aps4Dados/"+nomeDoArquivo+".txt");
+	public ArrayList<Dados> LerArquivo(String nome_do_Arquivo) throws IOException{
+		arquivo = new File("C:/Aps4Dados/"+nome_do_Arquivo+".txt");
 		ArrayList<Dados> lista = new ArrayList<Dados>();
 		if(arquivo.isFile()) {
 			br = new BufferedReader(new FileReader(arquivo));
@@ -82,7 +80,8 @@ public class DadosDAO {
 				if(verificador!=null) {
 					Dados informacao = new Dados();
 					informacao.setAno(verificador);
-					informacao.setDataAtualiz(br.readLine());
+					informacao.setMes(br.readLine());
+					informacao.setDataAtualizada(br.readLine());
 					informacao.setEstado(br.readLine());
 					informacao.setAreaTotal(Double.parseDouble(br.readLine()));
 					informacao.setAreaDesmatadaAno(Double.parseDouble(br.readLine()));
@@ -96,108 +95,121 @@ public class DadosDAO {
 				dado.setIndice(Indice(lista, dado));
 			}
 		}else {
-			semArquivo();
+			semArquivo(nome_do_Arquivo);
 		}
 		return lista;
 	}
-	
-	public void Update(int indice, Dados dado, ArrayList<Dados> lista, String nomeDoArquivo) throws IOException{
+	//Atualiza o valor do arquivo de dados de acordo com o indice recebido.
+	public void Update(int indice, Dados dado, ArrayList<Dados> lista, String nome_do_Arquivo) throws IOException{
 		
 		lista.set(indice, dado);
-		EscreverArquivo(lista, nomeDoArquivo);
+		EscreverArquivo(lista, nome_do_Arquivo);
 	}
-	
-	public void Delete(String nomeDoArquivo) throws IOException{
-		ArrayList<Dados> lista = LerArquivo(nomeDoArquivo);
+	//Deleta o primeiro valor do arquivo de dados.
+	public void Delete(String nome_do_Arquivo) throws IOException{
+		ArrayList<Dados> lista = LerArquivo(nome_do_Arquivo);
 		if(!lista.isEmpty()) {
 			lista.remove(0);
-			EscreverArquivo(lista, nomeDoArquivo);	
+			EscreverArquivo(lista, nome_do_Arquivo);	
 		}
 	}
 	
 	//Metodos de Pesquisa
-		public ArrayList<Dados> PesquisaAno(String Ano, String nomeDoArquivo) throws IOException{
-			ArrayList<Dados> resultado = new ArrayList<Dados>();
-	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
-			for(Dados dado: informacoes) {
-				if(dado.getAno().equals(Ano)) {
+	
+	//Pesquisa valores no arquivo de dados que coincidam com o ano digitado pelo usuário.
+	public ArrayList<Dados> PesquisaAno(String Ano, String nome_do_Arquivo) throws IOException{
+		ArrayList<Dados> resultado = new ArrayList<Dados>();
+		ArrayList<Dados> informacoes = LerArquivo(nome_do_Arquivo);
+		for(Dados dado: informacoes) {
+			if(dado.getAno().equals(Ano)) {
 					resultado.add(dado);
-				}
 			}
-			return resultado;
 		}
-		
-		public ArrayList<Dados> PesquisaDataAtualiz(String dataAtualiz, String nomeDoArquivo) throws IOException{
-			ArrayList<Dados> resultado = new ArrayList<Dados>();
-	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
-			for(Dados dado: informacoes) {
-				if(dado.getDataAtualiz().equals(dataAtualiz)) {
-					resultado.add(dado);
-				}
+			return resultado;
+	}
+	//Pesquisa valores no arquivo de dados que coincidam com o mês digitado pelo usuário.	
+	public ArrayList<Dados> PesquisaMes(String mes, String nome_do_Arquivo) throws IOException{
+		ArrayList<Dados> resultado = new ArrayList<Dados>();
+		ArrayList<Dados> informacoes = LerArquivo(nome_do_Arquivo);
+		for(Dados dado: informacoes) {
+			if(dado.getAno().equals(mes)) {
+				resultado.add(dado);
 			}
-			return resultado;
 		}
-		
-		public ArrayList<Dados> PesquisaSigla(String siglaEstado, String nomeDoArquivo) throws IOException{
-			ArrayList<Dados> resultado = new ArrayList<Dados>();
-	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
-			for(Dados dado: informacoes) {
-				if(dado.getEstado().equals(siglaEstado)) {
-					resultado.add(dado);
-				}
+		return resultado;
+	}
+	//Pesquisa valores no arquivo de dados que coincidam com a data atualizada digitada pelo usuário.	
+	public ArrayList<Dados> PesquisaDataAtualiz(String data_Atualizada, String nome_do_Arquivo) throws IOException{
+		ArrayList<Dados> resultado = new ArrayList<Dados>();
+		ArrayList<Dados> informacoes = LerArquivo(nome_do_Arquivo);
+		for(Dados dado: informacoes) {
+			if(dado.getDataAtualizada().equals(data_Atualizada)) {
+				resultado.add(dado);
 			}
-			return resultado;
 		}
-		
-		public ArrayList<Dados> PesquisaAreaTotal(double areaTotal, String nomeDoArquivo) throws IOException{
-			ArrayList<Dados> resultado = new ArrayList<Dados>();
-	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
-			for(Dados dado: informacoes) {
-				if(Double.compare(dado.getAreaTotal(),areaTotal) == 0) {
-					resultado.add(dado);
-				}
+		return resultado;
+	}
+	//Pesquisa valores no arquivo de dados que coincidam com o estado digitado pelo usuário.	
+	public ArrayList<Dados> PesquisaEstado(String estado, String nome_do_Arquivo) throws IOException{
+		ArrayList<Dados> resultado = new ArrayList<Dados>();
+		ArrayList<Dados> informacoes = LerArquivo(nome_do_Arquivo);
+		for(Dados dado: informacoes) {
+			if(dado.getEstado().equals(estado)) {
+				resultado.add(dado);
 			}
-			return resultado;
 		}
-		
-		public ArrayList<Dados> PesquisaAreaDesmatadaAno(double areaDesmatadaAno, String nomeDoArquivo) throws IOException{
-			ArrayList<Dados> resultado = new ArrayList<Dados>();
-	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
-			for(Dados dado: informacoes) {
-				if(Double.compare(dado.getAreaDesmatadaAno(), areaDesmatadaAno) == 0) {
-					resultado.add(dado);
-				}
+		return resultado;
+	}
+	//Pesquisa valores no arquivo de dados que coincidam com área total digitada pelo usuário.	
+	public ArrayList<Dados> PesquisaAreaTotal(double area_Total, String nome_do_Arquivo) throws IOException{
+		ArrayList<Dados> resultado = new ArrayList<Dados>();
+		ArrayList<Dados> informacoes = LerArquivo(nome_do_Arquivo);
+		for(Dados dado: informacoes) {
+			if(Double.compare(dado.getAreaTotal(),area_Total) == 0) {
+				resultado.add(dado);
 			}
-			return resultado;
 		}
-		
-		public ArrayList<Dados> PesquisaIndReflorestamento(double indReflorestamento, String nomeDoArquivo) throws IOException{
-			ArrayList<Dados> resultado = new ArrayList<Dados>();
-	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
-			for(Dados dado: informacoes) {
-				if(Double.compare(dado.getIndReflorestamento(),indReflorestamento) == 0) {
-					resultado.add(dado);
-				}
+		return resultado;
+	}
+	//Pesquisa valores no arquivo de dados que coincidam com o valor da área desmatada por ano digitado pelo usuário.	
+	public ArrayList<Dados> PesquisaAreaDesmatadaAno(double area_desmatada_ano, String nome_do_Arquivo) throws IOException{
+		ArrayList<Dados> resultado = new ArrayList<Dados>();
+		ArrayList<Dados> informacoes = LerArquivo(nome_do_Arquivo);
+		for(Dados dado: informacoes) {
+			if(Double.compare(dado.getAreaDesmatadaAno(), area_desmatada_ano) == 0) {
+				resultado.add(dado);
 			}
-			return resultado;
 		}
-		
-		public ArrayList<Dados> PesquisaIndIndustrial(double indIndustrial, String nomeDoArquivo) throws IOException{
-			ArrayList<Dados> resultado = new ArrayList<Dados>();
-	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
-			for(Dados dado: informacoes) {
-				if(Double.compare(dado.getIndIndustrial(),indIndustrial) == 0) {
-					resultado.add(dado);
-				}
+		return resultado;
+	}
+	//Pesquisa valores no arquivo de dados que coincidam com o valor do indice de Reflorestamento digitado pelo usuário.
+	public ArrayList<Dados> PesquisaIndReflorestamento(double indice_Reflorestamentoo, String nome_do_Arquivo) throws IOException{
+		ArrayList<Dados> resultado = new ArrayList<Dados>();
+		ArrayList<Dados> informacoes = LerArquivo(nome_do_Arquivo);
+		for(Dados dado: informacoes) {
+			if(Double.compare(dado.getIndReflorestamento(),indice_Reflorestamentoo) == 0) {
+				resultado.add(dado);
 			}
-			return resultado;
 		}
-		
+		return resultado;
+	}
+	//Pesquisa valores no arquivo de dados que coincidam com o valor do indice insdustrial digitado pelo usuário.
+	public ArrayList<Dados> PesquisaIndIndustrial(double indice_Industrial, String nome_do_Arquivo) throws IOException{
+		ArrayList<Dados> resultado = new ArrayList<Dados>();
+		ArrayList<Dados> informacoes = LerArquivo(nome_do_Arquivo);
+		for(Dados dado: informacoes) {
+			if(Double.compare(dado.getIndIndustrial(),indice_Industrial) == 0) {
+				resultado.add(dado);
+			}
+		}
+		return resultado;
+	}
+	
 	//Métodos de Utilidade
 	
 	//verifica se o arquivo possui dados escritos
-	public boolean ChecaArquivo(String nomeDoArquivo) throws IOException {
-		br = new BufferedReader(new FileReader("C:/Aps4Dados/"+nomeDoArquivo+".txt"));
+	public boolean ChecaArquivo(String nome_do_Arquivo) throws IOException {
+		br = new BufferedReader(new FileReader("C:/Aps4Dados/"+nome_do_Arquivo+".txt"));
 		String verificada = br.readLine();
 		br.close();
 		if(verificada==null) {
@@ -212,8 +224,9 @@ public class DadosDAO {
 		return lista.indexOf(dado);
 	}
 	
-	private void semArquivo() {
-		JOptionPane.showMessageDialog(null, "Arquivo ainda não existe!!\nCrie o arquivo na pagina inicial.");
+	//mensagem caso o arquivo de dados ainda não tenha sido criado pelo usuário
+	private void semArquivo(String nome_do_arquivo) {
+		JOptionPane.showMessageDialog(null, "Arquivo "+nome_do_arquivo+".txt ainda não existe!!\nCrie o arquivo na pagina inicial.");
 	}
 }
 

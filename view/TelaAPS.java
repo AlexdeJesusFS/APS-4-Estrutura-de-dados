@@ -15,7 +15,8 @@ public class TelaAPS extends javax.swing.JFrame {
     public TelaAPS() {
         initComponents();
         cl = (CardLayout) MainPanel.getLayout();
-        CM.setCard(cl, MainPanel);}
+        CM.setCard(cl, MainPanel);
+        this.setVisible(true);}
                        
     private void initComponents() {
         MainPanel = new javax.swing.JPanel();
@@ -190,13 +191,7 @@ public class TelaAPS extends javax.swing.JFrame {
     private void MergeSortActionPerformed(java.awt.event.ActionEvent evt) {                                          
       ctr.MergeSort(this);
     }       
-  
-
-   // public static void main(String args[]) {
-        //java.awt.EventQueue.invokeLater(new Runnable() {
-           // public void run() {
-              //  new TelaAPS().setVisible(true);}});}
-   
+    
     private javax.swing.JPanel MainPanel;
     private javax.swing.JPanel Menu;
     private javax.swing.JButton apagar;

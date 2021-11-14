@@ -3,24 +3,27 @@ package model;
 public class Dados {
 	private int indice;
 	private String ano;
-	private String dataAtualiz;
+	private String mes;
+	private String data_Atualizada;
 	private String estado;
-	private double areaTotal;
-	private double areaDesmatadaAno;
-	private double indReflorestamento;
-	private double indIndustrial;
+	private double area_total;
+	private double area_desmatada_ano;
+	private double indice_Reflorestamento;
+	private double indice_Industrial;
 	public Dados() {
 		
 	}
 	
-	public Dados(String ano ,String estado, double areaTotal, double areaDesmatadaAno, double indReflorestamento, double indIndustrial){
+	public Dados(String ano ,String estado,String mes,String data_atualizada, double area_total, double area_desmatada_ano, double indice_Reflorestamento, double indice_Industrial){
 		setAno(ano);
+		setMes(mes);
+		setDataAtualizada(data_atualizada);
 		setEstado(estado);
-		setAreaTotal(areaTotal);
-		setAreaDesmatadaAno(areaDesmatadaAno);
-		setIndReflorestamento(indReflorestamento);
-		setIndIndustrial(indIndustrial);
-		setDataAtualiz("");
+		setAreaTotal(area_total);
+		setAreaDesmatadaAno(area_desmatada_ano);
+		setIndReflorestamento(indice_Reflorestamento);
+		setIndIndustrial(indice_Industrial);
+		
 	}
 	
 	
@@ -41,12 +44,20 @@ public class Dados {
 		this.ano = ano;
 	}
 	
-	public String getDataAtualiz() {
-		return dataAtualiz;
+	public String getMes() {
+		return mes;
 	}
 	
-	public void setDataAtualiz(String dataAtualiz) {
-		this.dataAtualiz = dataAtualiz;
+	public void setMes(String mes) {
+		this.mes = mes;
+	}
+	
+	public String getDataAtualizada() {
+		return data_Atualizada;
+	}
+	
+	public void setDataAtualizada(String data_Atualizada) {
+		this.data_Atualizada = data_Atualizada;
 	}
 	
 	public String getEstado() {
@@ -58,51 +69,51 @@ public class Dados {
 	}
 	
 	public double getAreaTotal() {
-		return areaTotal;
+		return area_total;
 	}
 	
-	public void setAreaTotal(double areaTotal) {
-		this.areaTotal = areaTotal;
+	public void setAreaTotal(double area_total) {
+		this.area_total = area_total;
 	}
 	
 	public double getAreaDesmatadaAno() {
-		return areaDesmatadaAno;
+		return area_desmatada_ano;
 	}
 	
 	public void setAreaDesmatadaAno(double areaDestamatadaAno) {
-		this.areaDesmatadaAno = areaDestamatadaAno;
+		this.area_desmatada_ano = areaDestamatadaAno;
 	}
 	
 	public double getIndReflorestamento() {
-		return indReflorestamento;
+		return indice_Reflorestamento;
 	}
 	
-	public void setIndReflorestamento(double indReflorestamento) {
-		this.indReflorestamento = indReflorestamento;
+	public void setIndReflorestamento(double indice_Reflorestamento) {
+		this.indice_Reflorestamento = indice_Reflorestamento;
 	}
 	
 	public double getIndIndustrial() {
-		return indIndustrial;
+		return indice_Industrial;
 	}
 	
-	public void setIndIndustrial(double indIndustrial) {
-		this.indIndustrial = indIndustrial;
+	public void setIndIndustrial(double indice_Industrial) {
+		this.indice_Industrial = indice_Industrial;
 	}
 	
 	//Metodos para String
 	public String StringAreaTotal() {
-		return Double.toString(areaTotal);
+		return Double.toString(area_total);
 	}
 	
 	public String StringAreaDesmatada() {
-		return Double.toString(areaDesmatadaAno);
+		return Double.toString(area_desmatada_ano);
 	}
 	
 	public String StringReflorestamento() {
-		return Double.toString(indReflorestamento);
+		return Double.toString(indice_Reflorestamento);
 	}
 	
 	public String StringIndustrial() {
-		return Double.toString(indIndustrial);
+		return Double.toString(indice_Industrial);
 	}
 }

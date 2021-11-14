@@ -1,17 +1,15 @@
 
 package APS4;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
-
-import model.Dados;
-import model.DadosDAO;
+import view.TelaAPS;
 
 public class Main {
 
     public static void main(String[] args) {
+    	
+    	TelaAPS tela = new TelaAPS();
     	//-- Testes que o Guilherme estava fazendo --
+    	/*
     	Random rnd = new Random();
     	DadosDAO dados = new DadosDAO();
     	ArrayList<Dados> lista = new ArrayList<Dados>();
@@ -19,7 +17,7 @@ public class Main {
     	
         for(int i = 0; i < 1000; i++) {
         	Dados info = new Dados(Integer.toString(rnd.nextInt(10)),"a",20.0,30.0,40.0,50.0);
-        	info.setDataAtualiz("a");
+        	info.setDataAtualizada("a");
         	lista.add(info);
         }
     	
@@ -37,6 +35,7 @@ public class Main {
         }catch(IOException e) {
         	System.out.println(e);
         }
+        */
     	/*
         int[] vetor = new int[10];
         

@@ -170,49 +170,50 @@ public class TableMenu extends TelaBase {
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {                                       
         //Botão para selecionar uma informação para atualizar na parte com todas informações
         int row = table.getSelectedRow();
-        for(int i = 0; i <9;i++){
-            switch(i){
-                case 0:
-                    int id = parseInt(table.getModel().getValueAt(row, i).toString());
-                    TelaBase.id = id;
-                    break;
-                case 1:
-                    String ano = table.getModel().getValueAt(row, i).toString();
-                    TelaBase.ano = ano;
-                    break;
-                case 2:
-                    String mes = table.getModel().getValueAt(row, i).toString();
-                    TelaBase.mes = mes;
-                    break;
-                case 3:
-                    String atualizada = table.getModel().getValueAt(row, i).toString();
-                    TelaBase.atualizada = atualizada;
-                    break;
-                case 4:
-                    String estado = table.getModel().getValueAt(row, i).toString();
-                    TelaBase.estado = estado;
-                    break;
-                case 5:
-                    String areatotal = table.getModel().getValueAt(row, i).toString();
-                    TelaBase.areaTo = areatotal;
-                    break;
-                case 6:
-                    String areades = table.getModel().getValueAt(row, i).toString();
-                    TelaBase.areaDes = areades;
-                    break;
-                case 7:
-                    String porref = table.getModel().getValueAt(row, i).toString();
-                    TelaBase.porRef = porref;
-                    break;
-                case 8:
-                    String porind = table.getModel().getValueAt(row, i).toString();
-                    TelaBase.porInd = porind;
-                    break;
-                
+        if(row>=0) {
+        	for(int i = 0; i <9;i++){
+                switch(i){
+                    case 0:
+                        int id = parseInt(table.getModel().getValueAt(row, i).toString());
+                        TelaBase.id = id;
+                        break;
+                    case 1:
+                        String ano = table.getModel().getValueAt(row, i).toString();
+                        TelaBase.ano = ano;
+                        break;
+                    case 2:
+                        String mes = table.getModel().getValueAt(row, i).toString();
+                        TelaBase.mes = mes;
+                        break;
+                    case 3:
+                        String atualizada = table.getModel().getValueAt(row, i).toString();
+                        TelaBase.atualizada = atualizada;
+                        break;
+                    case 4:
+                        String estado = table.getModel().getValueAt(row, i).toString();
+                        TelaBase.estado = estado;
+                        break;
+                    case 5:
+                        String areatotal = table.getModel().getValueAt(row, i).toString();
+                        TelaBase.areaTo = areatotal;
+                        break;
+                    case 6:
+                        String areades = table.getModel().getValueAt(row, i).toString();
+                        TelaBase.areaDes = areades;
+                        break;
+                    case 7:
+                        String porref = table.getModel().getValueAt(row, i).toString();
+                        TelaBase.porRef = porref;
+                        break;
+                    case 8:
+                        String porind = table.getModel().getValueAt(row, i).toString();
+                        TelaBase.porInd = porind;
+                        break;
+                }
             }
+            cl.show(MainPanel, "UpdateMenu");
+            table.setVisible(false);
         }
-        cl.show(MainPanel, "UpdateMenu");
-        table.setVisible(false);
     }            
     
     public javax.swing.JTable getTable(){

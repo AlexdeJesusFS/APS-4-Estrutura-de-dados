@@ -149,54 +149,56 @@ public class SearchMenu extends TelaBase{
     private void searchSelectActionPerformed(java.awt.event.ActionEvent evt){                                             
         //Botão para selecionar uma informação para atualizar na parte com informações filtradas
         int row = filteredTable.getSelectedRow();
-        for(int i = 0; i <9;i++){
-            switch(i){
-                case 0:
-                    int g = parseInt(filteredTable.getModel().getValueAt(row, i).toString());
-                    TelaBase.id = g;
-                    break;
-                case 1:
-                    String ano = filteredTable.getModel().getValueAt(row, i).toString();
-                    TelaBase.ano = ano;
-                    break;
-                case 2:
-                    String mes = filteredTable.getModel().getValueAt(row, i).toString();
-                    TelaBase.mes = mes;
-                    break;
-                case 3:
-                    String atualizada = filteredTable.getModel().getValueAt(row, i).toString();
-                    TelaBase.atualizada = atualizada;
-                    break;
-                case 4:
-                    String estado = filteredTable.getModel().getValueAt(row, i).toString();
-                    TelaBase.estado = estado;
-                    break;
-                case 5:
-                    String areatotal = filteredTable.getModel().getValueAt(row, i).toString();
-                    TelaBase.areaTo = areatotal;
-                    break;
-                case 6:
-                    String areades = filteredTable.getModel().getValueAt(row, i).toString();
-                    TelaBase.areaDes = areades;
-                    break;
-                case 7:
-                    String porref = filteredTable.getModel().getValueAt(row, i).toString();
-                    TelaBase.porRef = porref;
-                    break;
-                case 8:
-                    String porind = filteredTable.getModel().getValueAt(row, i).toString();
-                    TelaBase.porInd = porind;
-                    break;  
+        if(row>=0) {
+        	for(int i = 0; i <9;i++){
+                switch(i){
+                    case 0:
+                        int g = parseInt(filteredTable.getModel().getValueAt(row, i).toString());
+                        TelaBase.id = g;
+                        break;
+                    case 1:
+                        String ano = filteredTable.getModel().getValueAt(row, i).toString();
+                        TelaBase.ano = ano;
+                        break;
+                    case 2:
+                        String mes = filteredTable.getModel().getValueAt(row, i).toString();
+                        TelaBase.mes = mes;
+                        break;
+                    case 3:
+                        String atualizada = filteredTable.getModel().getValueAt(row, i).toString();
+                        TelaBase.atualizada = atualizada;
+                        break;
+                    case 4:
+                        String estado = filteredTable.getModel().getValueAt(row, i).toString();
+                        TelaBase.estado = estado;
+                        break;
+                    case 5:
+                        String areatotal = filteredTable.getModel().getValueAt(row, i).toString();
+                        TelaBase.areaTo = areatotal;
+                        break;
+                    case 6:
+                        String areades = filteredTable.getModel().getValueAt(row, i).toString();
+                        TelaBase.areaDes = areades;
+                        break;
+                    case 7:
+                        String porref = filteredTable.getModel().getValueAt(row, i).toString();
+                        TelaBase.porRef = porref;
+                        break;
+                    case 8:
+                        String porind = filteredTable.getModel().getValueAt(row, i).toString();
+                        TelaBase.porInd = porind;
+                        break;  
+                }
             }
+            cl.show(MainPanel, "UpdateMenu");
+            filteredTable.setVisible(false);
         }
-        cl.show(MainPanel, "UpdateMenu");
-        filteredTable.setVisible(false);
     }                                            
 
     private void filterActionPerformed(java.awt.event.ActionEvent evt) {
         //Botão para salvar a informação e utilizar para adicionar as informações a tabela
-    	ctr.Search(this);
     	filteredTable.setVisible(true);
+        ctr.Search(this);	
     }
      
     private ControlTela ctr = new ControlTela();
