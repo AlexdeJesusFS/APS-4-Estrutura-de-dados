@@ -8,7 +8,7 @@ import java.util.Date;
 
 
 public class CreateMenu extends TelaBase {
-    private static Date date = new Date();
+	private static Date date = new Date();
     private static LocalDate localDate;
     private static int year;
     private static int month;
@@ -46,7 +46,7 @@ public class CreateMenu extends TelaBase {
         stateLabel.setText("Estado:");
 
         stateChoice.setFont(new java.awt.Font("Dialog", 0, 14));
-        stateChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acre", "Alagoas", "Amap·", "Amazonas", "Bahia", "Cear·", "EspÌrito Santo", "Goi·s", "Maranh„o", "Mato Grosso", "Mato Grosso do sul", "Minas Gerais", "Par·", "ParaÌba", "Paran·", "Pernambuco", "PiauÌ", "Rio de Janeiro", "Rio Grande do norte", "Rio Grande do sul", "RondÙnia", "Roraima", "Santa Catarina", "S„o Paulo", "Sergipe", "Tocantins", "Distrito Federal" }));
+        stateChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acre", "Alagoas", "Amap√°", "Amazonas", "Bahia", "Cear√°", "Esp√≠rito Santo", "Goi√°s", "Maranh√£o", "Mato Grosso", "Mato Grosso do sul", "Minas Gerais", "Par√°", "Para√≠ba", "Paran√°", "Pernambuco", "Piau√≠", "Rio de Janeiro", "Rio Grande do norte", "Rio Grande do sul", "Rond√¥nia", "Roraima", "Santa Catarina", "S√£o Paulo", "Sergipe", "Tocantins", "Distrito Federal" }));
 
         yearPostedLabel.setFont(new java.awt.Font("Dialog", 0, 14)); 
         yearPostedLabel.setText("Ano em que a coleta de dados foi realizada:");
@@ -54,12 +54,12 @@ public class CreateMenu extends TelaBase {
         yearPosted.setFont(new java.awt.Font("Dialog", 0, 14)); 
 
         areaLabel.setFont(new java.awt.Font("Dialog", 0, 14)); 
-        areaLabel.setText("¡rea total(km≤):");
+        areaLabel.setText("√Årea total(km¬≤):");
 
         area.setFont(new java.awt.Font("Dialog", 0, 14)); 
 
         desmAreaLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-        desmAreaLabel.setText("¡rea desmatada este ano(km≤):");
+        desmAreaLabel.setText("√Årea desmatada este ano(km¬≤):");
 
         desmArea.setFont(new java.awt.Font("Dialog", 0, 14));
 

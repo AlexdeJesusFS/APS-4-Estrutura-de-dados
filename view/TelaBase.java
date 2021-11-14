@@ -22,6 +22,11 @@ public class TelaBase extends javax.swing.JPanel {
     public String getArchiveName(){
         return archiveName;
     }
+    
+    public int getID() {
+    	return id;
+    }
+    
     public void setCard(CardLayout cl, JPanel Main){
         TelaBase.cl = cl;
         TelaBase.MainPanel = Main;

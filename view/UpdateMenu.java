@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
+import control.ControlTela;
+
 public class UpdateMenu extends TelaBase{
     private static Date date = new Date();
     private static LocalDate localDate;
@@ -11,6 +13,7 @@ public class UpdateMenu extends TelaBase{
     private static int month;
     private static int day;
     private String dataPost;
+    private ControlTela ctr = new ControlTela();
     
     public UpdateMenu(){
         initComponents();
@@ -203,6 +206,7 @@ public class UpdateMenu extends TelaBase{
     private void createSaveActionPerformed(java.awt.event.ActionEvent evt) {          
     	adicionarInfo.setVisible(true);
     	updateSave.setVisible(false);
+    	ctr.Update(this);
     }                                          
 
     
@@ -223,6 +227,7 @@ public class UpdateMenu extends TelaBase{
         this.setAreaDesm(TelaBase.areaDes);
         this.setPorIndus(TelaBase.porInd);
         this.setPorReflo(TelaBase.porRef);
+        
     }    
       
     private javax.swing.JPanel UpdateMenu;

@@ -1,4 +1,4 @@
-package APS 4;
+package APS4;
 
 import java.util.ArrayList;
 

@@ -2,6 +2,8 @@ package view;
 
 import static java.lang.Integer.parseInt;
 
+import control.ControlTela;
+
 public class TableMenu extends TelaBase {
 	
 	
@@ -154,7 +156,7 @@ public class TableMenu extends TelaBase {
     }
     private void listAddInfoActionPerformed(java.awt.event.ActionEvent evt) {
     	this.setArchiveName(archiveSelected.getItemAt(archiveSelected.getSelectedIndex()));
-        
+        ctr.Read(this);
     }
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {                                       
@@ -199,7 +201,12 @@ public class TableMenu extends TelaBase {
         }
         cl.show(MainPanel, "UpdateMenu");
     }            
-
+    
+    public javax.swing.JTable getTable(){
+    	return table;
+    }
+    
+    private ControlTela ctr = new ControlTela();
     private javax.swing.JPanel TableMenu;
     private javax.swing.JLabel infoLabel;
     private javax.swing.JButton infoReturn;

@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import APS.Sort;
+import APS4.Sort;
 import model.Dados;
 import model.DadosDAO;
 import view.CreateMenu;
@@ -33,18 +34,34 @@ public class ControlTela {
 	public void Insert(CreateMenu tela) {
 		Dados insert = new Dados();
 		insert.setAno(tela.getYearPosted());
-		insert.setSiglaEstado(tela.getStateChoice());
+		insert.setEstado(tela.getStateChoice());
 		insert.setAreaTotal(Double.parseDouble(tela.getArea()));
 		insert.setAreaDesmatadaAno(Double.parseDouble(tela.getAreaDesm()));
 		insert.setIndReflorestamento(Double.parseDouble(tela.getPorReflo()));
 		insert.setIndIndustrial(Double.parseDouble(tela.getPorIndus()));
 		insert.setDataAtualiz(tela.getDataPostada());
 		mng.EscreverArquivo(insert, "entrada");
+		JOptionPane.showMessageDialog(tela, "Dado Adicionado com Sucesso!");
 	}
 	
 	public void Read(TableMenu tela) {
 		try {
-			ArrayList<Dados> lista = mng.LerArquivo("");
+			ArrayList<Dados> lista = mng.LerArquivo(tela.getArchiveName());
+			DefaultTableModel modelo = (DefaultTableModel) tela.getTable().getModel();
+			modelo.setRowCount(0);
+			for(int i = 0; i < lista.size(); i++) {
+				Object[] linha = new Object[8];
+				linha[0] = Integer.toString(lista.get(i).getIndice());
+				linha[1] = lista.get(i).getAno();
+				linha[2] = lista.get(i).getDataAtualiz();
+				linha[3] = lista.get(i).getEstado();
+				linha[4] = lista.get(i).StringAreaTotal();
+				linha[5] = lista.get(i).StringAreaDesmatada();
+				linha[6] = lista.get(i).StringReflorestamento();
+				linha[7] = lista.get(i).StringIndustrial();
+				modelo.addRow(linha);
+			}
+			tela.getTable().setModel(modelo);
 			//Ações que vão levar o valor dessa lista para a tela
 		}catch(IOException e) {
 			show(e);
@@ -54,7 +71,7 @@ public class ControlTela {
 	public void Update(UpdateMenu tela) {
 		Dados dado = new Dados();
 		dado.setAno(tela.getYearPosted());
-		dado.setSiglaEstado(tela.getStateChoice());
+		dado.setEstado(tela.getStateChoice());
 		dado.setAreaTotal(Double.parseDouble(tela.getArea()));
 		dado.setAreaDesmatadaAno(Double.parseDouble(tela.getAreaDesm()));
 		dado.setIndReflorestamento(Double.parseDouble(tela.getPorReflo()));
@@ -71,6 +88,21 @@ public class ControlTela {
 	public void Search(SearchMenu tela) {
 		try {
 			ArrayList<Dados> lista = SelectSearch(tela.getSearchChoice(), tela);
+			DefaultTableModel modelo = (DefaultTableModel) tela.getTable().getModel();
+			modelo.setRowCount(0);
+			for(int i = 0; i < lista.size(); i++) {
+				Object[] linha = new Object[8];
+				linha[0] = Integer.toString(lista.get(i).getIndice());
+				linha[1] = lista.get(i).getAno();
+				linha[2] = lista.get(i).getDataAtualiz();
+				linha[3] = lista.get(i).getEstado();
+				linha[4] = lista.get(i).StringAreaTotal();
+				linha[5] = lista.get(i).StringAreaDesmatada();
+				linha[6] = lista.get(i).StringReflorestamento();
+				linha[7] = lista.get(i).StringIndustrial();
+				modelo.addRow(linha);
+			}
+			tela.getTable().setModel(modelo);
 			//Ações que vão levar essa arraylist pro objeto da JList na tela
 		} catch(IOException e) {
 			show(e);
@@ -110,33 +142,41 @@ public class ControlTela {
 	public void Delete(TelaAPS tela) {
 		try{
 			mng.Delete("entrada");
-			JOptionPane.showMessageDialog(null, "Dado deletado da Fila com Sucesso!", "Sucesso", 0);
+			JOptionPane.showMessageDialog(tela, "Primeiro dado deletado da fila com Sucesso!", "Deletado", 0);
 		} catch(IOException e){
 				show(e);
 		}
 	}
 	
-	public void QuickSort() {
+	public void QuickSort(TelaAPS tela) {
 		try {
 			ArrayList<Dados> lista = mng.LerArquivo("entrada");
-			log.info("Inicio do QuickSort com "+ lista.size() + " objetos.");
-			sort.quickSort(lista, 0, lista.size()-1);
-			log.info("Termino do QuickSort com "+ lista.size() + " objetos.");
-			mng.CriarArquivo("QuickSort");
-			mng.EscreverArquivo(lista, "QuickSort");
+			if(lista.isEmpty()) {
+				JOptionPane.showMessageDialog(tela, "O Arquivo de Dados entrada.txt ainda não existe.\nCrie ele no botão ");
+			}else {
+				log.info("Inicio do QuickSort com "+ lista.size() + " objetos.");
+				sort.quickSort(lista, 0, lista.size()-1);
+				log.info("Termino do QuickSort com "+ lista.size() + " objetos.");
+				mng.CriarArquivo("QuickSort");
+				mng.EscreverArquivo(lista, "QuickSort");
+			}
 		}catch(IOException e) {
 			show(e);
 		}
 	}
 	
-	public void MergeSort() {
+	public void MergeSort(TelaAPS tela) {
 		try {
 			ArrayList<Dados> lista = mng.LerArquivo("entrada");
-			log.info("Inicio do MergeSort com "+ lista.size() + " objetos.");
-			sort.mergeSort(lista, lista.size()-1);
-			log.info("Termino do MergeSort com "+ lista.size() + " objetos.");
-			mng.CriarArquivo("MergeSort");
-			mng.EscreverArquivo(lista, "MergeSort");
+			if(lista.isEmpty()) {
+				JOptionPane.showMessageDialog(tela, "O Arquivo de Dados entrada.txt ainda não existe.\nCrie ele no botão ");
+			}else {
+				log.info("Inicio do MergeSort com "+ lista.size() + " objetos.");
+				sort.mergeSort(lista, lista.size()-1);
+				log.info("Termino do MergeSort com "+ lista.size() + " objetos.");
+				mng.CriarArquivo("MergeSort");
+				mng.EscreverArquivo(lista, "MergeSort");
+			}
 		}catch(IOException e) {
 			show(e);
 		}

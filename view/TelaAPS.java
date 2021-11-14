@@ -2,6 +2,7 @@ package view;
 
 import java.awt.CardLayout;
 //import control.ControlTela;
+import control.ControlTela;
 
 public class TelaAPS extends javax.swing.JFrame {
     CardLayout cl;
@@ -184,21 +185,20 @@ public class TelaAPS extends javax.swing.JFrame {
         cl.show(MainPanel, "SearchMenu");
     }           
     private void sortActionPerformed(java.awt.event.ActionEvent evt) {                                     
-       ctr.QuickSort();
+    	
     }
     private void apagarActionPerformed(java.awt.event.ActionEvent evt) {                                       
       ctr.Delete(this);
     }
     private void createArchiveActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        if(archiveName.getText()!=null) {
-        	ctr.Create(this);}
+      ctr.Create(this);
     }
     private void QuickSortActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        
+      ctr.QuickSort(this);
     }                                         
 
     private void MergeSortActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        
+      ctr.MergeSort(this);
     }       
   
 
@@ -206,9 +206,6 @@ public class TelaAPS extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaAPS().setVisible(true);}});}
-   
-  public String getArchiveName() { 
-	  return archiveName.getText();}
    
     private javax.swing.JPanel MainPanel;
     private javax.swing.JPanel Menu;

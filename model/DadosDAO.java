@@ -32,20 +32,25 @@ public class DadosDAO {
 	//Escreve no final do arquivo os dados adicionados
 	public void EscreverArquivo(Dados dado, String nomeDoArquivo) { 
 		try {
-			boolean verificador = ChecaArquivo(nomeDoArquivo);
-			bw = new BufferedWriter(new FileWriter("C:/Aps4Dados/"+nomeDoArquivo+".txt",true));
-			if(!verificador) {
-				bw.write("--Inicio--\n");	
+			arquivo = new File("C:/Aps4Dados/"+nomeDoArquivo+".txt");
+			if(arquivo.isFile()) {
+				boolean verificador = ChecaArquivo(nomeDoArquivo);
+				bw = new BufferedWriter(new FileWriter(arquivo,true));
+				if(!verificador) {
+					bw.write("--Inicio--\n");	
+				}
+				bw.write(dado.getAno()+"\n");
+				bw.write(dado.getDataAtualiz()+"\n");
+				bw.write(dado.getEstado()+"\n");
+				bw.write(dado.StringAreaTotal()+"\n");
+				bw.write(dado.StringAreaDesmatada()+"\n");
+				bw.write(dado.StringReflorestamento()+"\n");
+				bw.write(dado.StringIndustrial()+"\n");
+				bw.write("--count--\n");
+				bw.close();
+			}else {
+				semArquivo();
 			}
-			bw.write(dado.getAno()+"\n");
-			bw.write(dado.getDataAtualiz()+"\n");
-			bw.write(dado.getSiglaEstado()+"\n");
-			bw.write(dado.StringAreaTotal()+"\n");
-			bw.write(dado.StringAreaDesmatada()+"\n");
-			bw.write(dado.StringReflorestamento()+"\n");
-			bw.write(dado.StringIndustrial()+"\n");
-			bw.write("--count--\n");
-			bw.close();
 		}
 		catch(IOException e) {
 			JOptionPane.showMessageDialog(null, e, "Erro", 0);
@@ -54,34 +59,44 @@ public class DadosDAO {
 	
 	//Sobrescreve o arquivo existente com os dados da Arraylist
 	public void EscreverArquivo(ArrayList<Dados> informacao, String nomeDoArquivo) throws IOException{ 
-			bw = new BufferedWriter(new FileWriter("C:/Aps4Dados/"+nomeDoArquivo+".txt",false));
+		arquivo = new File("C:/Aps4Dados/"+nomeDoArquivo+".txt");
+		if(arquivo.isFile()) {
+			bw = new BufferedWriter(new FileWriter(arquivo,false));
 			bw.write("");
 			informacao.forEach((dado) -> EscreverArquivo(dado,nomeDoArquivo));
+		} else {
+			semArquivo();
+		}
 	}
 	
 	//Lê o arquivo completo e retorna todos os valores para uma Arraylist
 	public ArrayList<Dados> LerArquivo(String nomeDoArquivo) throws IOException{
-		br = new BufferedReader(new FileReader("C:/Aps4Dados/"+nomeDoArquivo+".txt"));
+		arquivo = new File("C:/Aps4Dados/"+nomeDoArquivo+".txt");
 		ArrayList<Dados> lista = new ArrayList<Dados>();
-		String verificador = "";
-		do {
-			br.readLine();
-			verificador = br.readLine();
-			if(verificador!=null) {
-				Dados informacao = new Dados();
-				informacao.setAno(verificador);
-				informacao.setDataAtualiz(br.readLine());
-				informacao.setSiglaEstado(br.readLine());
-				informacao.setAreaTotal(Double.parseDouble(br.readLine()));
-				informacao.setAreaDesmatadaAno(Double.parseDouble(br.readLine()));
-				informacao.setIndReflorestamento(Double.parseDouble(br.readLine()));
-				informacao.setIndIndustrial(Double.parseDouble(br.readLine()));
-				lista.add(informacao);
+		if(arquivo.isFile()) {
+			br = new BufferedReader(new FileReader(arquivo));
+			String verificador = "";
+			do {
+				br.readLine();
+				verificador = br.readLine();
+				if(verificador!=null) {
+					Dados informacao = new Dados();
+					informacao.setAno(verificador);
+					informacao.setDataAtualiz(br.readLine());
+					informacao.setEstado(br.readLine());
+					informacao.setAreaTotal(Double.parseDouble(br.readLine()));
+					informacao.setAreaDesmatadaAno(Double.parseDouble(br.readLine()));
+					informacao.setIndReflorestamento(Double.parseDouble(br.readLine()));
+					informacao.setIndIndustrial(Double.parseDouble(br.readLine()));
+					lista.add(informacao);
+				}
 			}
-		}
-		while(verificador!=null);
-		for (Dados dado : lista) {
-			dado.setIndice(Indice(lista, dado));
+			while(verificador!=null);
+			for (Dados dado : lista) {
+				dado.setIndice(Indice(lista, dado));
+			}
+		}else {
+			semArquivo();
 		}
 		return lista;
 	}
@@ -94,8 +109,10 @@ public class DadosDAO {
 	
 	public void Delete(String nomeDoArquivo) throws IOException{
 		ArrayList<Dados> lista = LerArquivo(nomeDoArquivo);
-		lista.remove(0);
-		EscreverArquivo(lista, nomeDoArquivo);
+		if(!lista.isEmpty()) {
+			lista.remove(0);
+			EscreverArquivo(lista, nomeDoArquivo);	
+		}
 	}
 	
 	//Metodos de Pesquisa
@@ -103,7 +120,7 @@ public class DadosDAO {
 			ArrayList<Dados> resultado = new ArrayList<Dados>();
 	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
 			for(Dados dado: informacoes) {
-				if(dado.getAno()==Ano) {
+				if(dado.getAno().equals(Ano)) {
 					resultado.add(dado);
 				}
 			}
@@ -114,7 +131,7 @@ public class DadosDAO {
 			ArrayList<Dados> resultado = new ArrayList<Dados>();
 	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
 			for(Dados dado: informacoes) {
-				if(dado.getDataAtualiz()==dataAtualiz) {
+				if(dado.getDataAtualiz().equals(dataAtualiz)) {
 					resultado.add(dado);
 				}
 			}
@@ -125,7 +142,7 @@ public class DadosDAO {
 			ArrayList<Dados> resultado = new ArrayList<Dados>();
 	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
 			for(Dados dado: informacoes) {
-				if(dado.getSiglaEstado()==siglaEstado) {
+				if(dado.getEstado().equals(siglaEstado)) {
 					resultado.add(dado);
 				}
 			}
@@ -136,7 +153,7 @@ public class DadosDAO {
 			ArrayList<Dados> resultado = new ArrayList<Dados>();
 	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
 			for(Dados dado: informacoes) {
-				if(dado.getAreaTotal()==areaTotal) {
+				if(Double.compare(dado.getAreaTotal(),areaTotal) == 0) {
 					resultado.add(dado);
 				}
 			}
@@ -147,7 +164,7 @@ public class DadosDAO {
 			ArrayList<Dados> resultado = new ArrayList<Dados>();
 	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
 			for(Dados dado: informacoes) {
-				if(dado.getAreaDesmatadaAno()==areaDesmatadaAno) {
+				if(Double.compare(dado.getAreaDesmatadaAno(), areaDesmatadaAno) == 0) {
 					resultado.add(dado);
 				}
 			}
@@ -158,7 +175,7 @@ public class DadosDAO {
 			ArrayList<Dados> resultado = new ArrayList<Dados>();
 	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
 			for(Dados dado: informacoes) {
-				if(dado.getIndReflorestamento()==indReflorestamento) {
+				if(Double.compare(dado.getIndReflorestamento(),indReflorestamento) == 0) {
 					resultado.add(dado);
 				}
 			}
@@ -169,7 +186,7 @@ public class DadosDAO {
 			ArrayList<Dados> resultado = new ArrayList<Dados>();
 	 		ArrayList<Dados> informacoes = LerArquivo(nomeDoArquivo);
 			for(Dados dado: informacoes) {
-				if(dado.getIndIndustrial()==indIndustrial) {
+				if(Double.compare(dado.getIndIndustrial(),indIndustrial) == 0) {
 					resultado.add(dado);
 				}
 			}
@@ -190,24 +207,13 @@ public class DadosDAO {
 		}
 	}
 	
-	//conta a quantidade de dados presentes no arquivo
-	/*
-	public int ContarQuantidade(String nomeDoArquivo) throws IOException{
-		int contador = 0;
-		br = new BufferedReader(new FileReader("C:/Aps4Dados/"+nomeDoArquivo+".txt"));
-		String linha = "";
-		while((linha=br.readLine())!=null) {
-			if(linha.equals("--count--")) {
-				contador++;
-			}
-		}
-		br.close();
-		return contador;
-	}
-	*/
 	//Retorna o Indice do objeto dentro do vetor dado
 	public int Indice(ArrayList<Dados> lista, Dados dado) {
 		return lista.indexOf(dado);
+	}
+	
+	private void semArquivo() {
+		JOptionPane.showMessageDialog(null, "Arquivo ainda não existe!!\nCrie o arquivo na pagina inicial.");
 	}
 }
 

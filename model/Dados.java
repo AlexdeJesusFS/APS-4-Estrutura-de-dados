@@ -4,19 +4,18 @@ public class Dados {
 	private int indice;
 	private String ano;
 	private String dataAtualiz;
-	private String SiglaEstado;
+	private String estado;
 	private double areaTotal;
 	private double areaDesmatadaAno;
 	private double indReflorestamento;
 	private double indIndustrial;
-	
 	public Dados() {
 		
 	}
 	
-	public Dados(String ano ,String siglaEstado, double areaTotal, double areaDesmatadaAno, double indReflorestamento, double indIndustrial){
+	public Dados(String ano ,String estado, double areaTotal, double areaDesmatadaAno, double indReflorestamento, double indIndustrial){
 		setAno(ano);
-		setSiglaEstado(siglaEstado);
+		setEstado(estado);
 		setAreaTotal(areaTotal);
 		setAreaDesmatadaAno(areaDesmatadaAno);
 		setIndReflorestamento(indReflorestamento);
@@ -50,12 +49,12 @@ public class Dados {
 		this.dataAtualiz = dataAtualiz;
 	}
 	
-	public String getSiglaEstado() {
-		return SiglaEstado;
+	public String getEstado() {
+		return estado;
 	}
 	
-	public void setSiglaEstado(String siglaEstado) {
-		SiglaEstado = siglaEstado;
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 	
 	public double getAreaTotal() {

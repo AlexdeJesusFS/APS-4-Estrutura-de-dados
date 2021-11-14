@@ -1,6 +1,8 @@
 package view;
 import static java.lang.Integer.parseInt;
 
+import control.ControlTela;
+
 public class SearchMenu extends TelaBase{
     public SearchMenu(){
         initComponents();
@@ -177,10 +179,12 @@ public class SearchMenu extends TelaBase{
         cl.show(MainPanel, "UpdateMenu");
     }                                            
 
-    private void filterActionPerformed(java.awt.event.ActionEvent evt) {                                       
+    private void filterActionPerformed(java.awt.event.ActionEvent evt) {
         //Botão para salvar a informação e utilizar para adicionar as informações a tabela
+    	ctr.Search(this);
     }
-      
+     
+    private ControlTela ctr = new ControlTela();
     private javax.swing.JPanel SearchMenu;
     private javax.swing.JScrollPane fScrollTable;
     private javax.swing.JButton filter;
@@ -195,5 +199,10 @@ public class SearchMenu extends TelaBase{
         return searchChoice.getItemAt(searchChoice.getSelectedIndex());
     }
     public String getSearchChosen(){
-        return searchChosen.getText();}
+        return searchChosen.getText();
+    }
+    
+    public javax.swing.JTable getTable(){
+    	return filteredTable;
+    }
 }
