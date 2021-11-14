@@ -3,7 +3,7 @@ package Comparando;
 
 public class Main {
     public static void main(String[] args) {
-        int[] vetor = new int[1000000];//100x, 1.000x, 10.000x, 100.000x, 1.000.000
+        int[] vetor = new int[100];//100x, 1.000x, 10.000x, 100.000x, 1.000.000x
         
         for(int i=0; i < vetor.length; i++){
             vetor[i] = (int) Math.floor(Math.random() * vetor.length);
@@ -14,7 +14,7 @@ public class Main {
         
         System.out.println("Comparando Algoritmos de Orndernação");               
         System.out.println("Tempo em MilliSsegundos");
-        /*
+        
         System.out.println("\nBubble Sort");        
         BubbleSort bublle = new BubbleSort();
         inicio = System.currentTimeMillis();
@@ -22,8 +22,8 @@ public class Main {
         fim = System.currentTimeMillis();
         System.out.println("Tempo: " + (fim-inicio));             
         System.out.println("Trocas: " + bublle.getTrocas()); 
-        */
-        /*
+        
+        
         System.out.println("\nInsertion Sort");
         InsertionSort insertion = new InsertionSort();
         inicio = System.currentTimeMillis();
@@ -39,7 +39,7 @@ public class Main {
         fim = System.currentTimeMillis();
         System.out.println("Tempo: " + (fim-inicio));             
         System.out.println("Trocas: " + selection.getTrocas());              
-        */
+        
         System.out.println("\nMerge Sort");
         MergeSort merge = new MergeSort();
         inicio = System.currentTimeMillis();
