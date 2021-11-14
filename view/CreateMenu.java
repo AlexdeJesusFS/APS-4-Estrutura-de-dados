@@ -8,7 +8,7 @@ import java.util.Date;
 
 
 public class CreateMenu extends TelaBase {
-	private static Date date = new Date();
+    private static Date date = new Date();
     private static LocalDate localDate;
     private static int year;
     private static int month;
@@ -37,6 +37,8 @@ public class CreateMenu extends TelaBase {
         porIndus = new javax.swing.JTextField();
         createSave = new javax.swing.JButton();
         createReturn = new javax.swing.JButton();
+        monthLabel = new javax.swing.JLabel();
+        monthChoice = new javax.swing.JComboBox<>();
        
 
         addLabel.setFont(new java.awt.Font("Dialog", 1, 48)); 
@@ -59,17 +61,17 @@ public class CreateMenu extends TelaBase {
         area.setFont(new java.awt.Font("Dialog", 0, 14)); 
 
         desmAreaLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-        desmAreaLabel.setText("Área desmatada este ano(km²):");
+        desmAreaLabel.setText("Área desmatada(km²):");
 
         desmArea.setFont(new java.awt.Font("Dialog", 0, 14));
 
         porRefloLabel.setFont(new java.awt.Font("Dialog", 0, 14)); 
-        porRefloLabel.setText("Porcentagem anual de reflorestamento:");
+        porRefloLabel.setText("Porcentagem reflorestada:");
 
         porReflo.setFont(new java.awt.Font("Dialog", 0, 14)); 
 
         porIndusLabel.setFont(new java.awt.Font("Dialog", 0, 14)); 
-        porIndusLabel.setText("Porcentagem anual usada industrialmente:");
+        porIndusLabel.setText("Porcentagem usada industrialmente:");
 
         porIndus.setFont(new java.awt.Font("Dialog", 0, 14)); 
 
@@ -88,6 +90,13 @@ public class CreateMenu extends TelaBase {
                 createReturnActionPerformed(evt);
             }
         });
+        
+        monthLabel.setFont(new java.awt.Font("Dialog", 0, 14)); 
+        monthLabel.setText("Mês que a coleta de dados foi realizada:");
+
+        monthChoice.setFont(new java.awt.Font("Dialog", 0, 14)); 
+        monthChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" }));
+
        
 
         javax.swing.GroupLayout CreateMenuLayout = new javax.swing.GroupLayout(CreateMenu);
@@ -97,9 +106,9 @@ public class CreateMenu extends TelaBase {
             .addGroup(CreateMenuLayout.createSequentialGroup()
                 .addGroup(CreateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CreateMenuLayout.createSequentialGroup()
-                        .addContainerGap(340, Short.MAX_VALUE)
+                        .addContainerGap(440, Short.MAX_VALUE)
                         .addComponent(addLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 341, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 441, Short.MAX_VALUE))
                     .addGroup(CreateMenuLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(CreateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,6 +142,10 @@ public class CreateMenu extends TelaBase {
                 .addComponent(stateLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(stateChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(monthLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(monthChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             
         );
@@ -141,9 +154,12 @@ public class CreateMenu extends TelaBase {
             .addGroup(CreateMenuLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(addLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addGroup(CreateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(stateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(stateChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(stateChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(monthLabel)
+                    .addComponent(monthChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(CreateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(yearPostedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,7 +193,7 @@ public class CreateMenu extends TelaBase {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGap(0, 1100, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -202,7 +218,8 @@ public class CreateMenu extends TelaBase {
             month = localDate.getMonthValue();
             day = localDate.getDayOfMonth();
             dataPost = year+"/"+month+"/"+day;
-    		ctr.Insert(this);}
+    		ctr.Insert(this);
+        }
     }                                          
     
     private void createReturnActionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,6 +242,8 @@ public class CreateMenu extends TelaBase {
     private javax.swing.JLabel porRefloLabel;
     private javax.swing.JComboBox<String> stateChoice;
     private javax.swing.JLabel stateLabel;
+    private javax.swing.JComboBox<String> monthChoice;
+    private javax.swing.JLabel monthLabel;
     
     
     //Getters  
@@ -248,6 +267,9 @@ public class CreateMenu extends TelaBase {
     }  
     public String getDataPostada(){
         return dataPost;
+    }
+    public String getMonthChoice(){
+        return monthChoice.getItemAt(monthChoice.getSelectedIndex());
     }
    
    

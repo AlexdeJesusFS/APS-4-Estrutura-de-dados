@@ -18,7 +18,9 @@ public class UpdateMenu extends TelaBase{
     public UpdateMenu(){
         initComponents();
         updateSave.setVisible(false);
+        this.buttonVisible(false);  
     }
+    
    private void initComponents() {
         UpdateMenu = new javax.swing.JPanel();
         updateLabel = new javax.swing.JLabel();
@@ -37,6 +39,8 @@ public class UpdateMenu extends TelaBase{
         updateSave = new javax.swing.JButton();
         updateReturn = new javax.swing.JButton();
         adicionarInfo = new javax.swing.JButton();
+        monthLabel = new javax.swing.JLabel();
+        monthChoice = new javax.swing.JComboBox<>();
 
         updateLabel.setFont(new java.awt.Font("Dialog", 1, 48)); 
         updateLabel.setText("Atualizar");
@@ -87,13 +91,20 @@ public class UpdateMenu extends TelaBase{
                 createReturnActionPerformed(evt);
             }
         });
-        adicionarInfo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        adicionarInfo.setFont(new java.awt.Font("Dialog", 0, 14)); 
         adicionarInfo.setText("ADICIONAR");
         adicionarInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 adicionarActionPerformed(evt);
             }
         });
+        
+        monthLabel.setFont(new java.awt.Font("Dialog", 0, 14)); 
+        monthLabel.setText("Mês que a coleta de dados foi realizada:");
+
+        monthChoice.setFont(new java.awt.Font("Dialog", 0, 14)); 
+        monthChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" }));
+
 
         javax.swing.GroupLayout CreateMenuLayout = new javax.swing.GroupLayout(UpdateMenu);
         UpdateMenu.setLayout(CreateMenuLayout);
@@ -102,9 +113,9 @@ public class UpdateMenu extends TelaBase{
             .addGroup(CreateMenuLayout.createSequentialGroup()
                 .addGroup(CreateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CreateMenuLayout.createSequentialGroup()
-                        .addContainerGap(340, Short.MAX_VALUE)
+                        .addContainerGap(440, Short.MAX_VALUE)
                         .addComponent(updateLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 341, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 441, Short.MAX_VALUE))
                     .addGroup(CreateMenuLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(CreateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,6 +151,10 @@ public class UpdateMenu extends TelaBase{
                 .addComponent(stateLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(updateStateChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(monthLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(monthChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CreateMenuLayout.setVerticalGroup(
@@ -150,7 +165,10 @@ public class UpdateMenu extends TelaBase{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(CreateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(stateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(updateStateChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(updateStateChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(monthLabel)
+                    .addComponent(monthChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                
                 .addGap(18, 18, 18)
                 .addGroup(CreateMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(yearPostedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,12 +224,16 @@ public class UpdateMenu extends TelaBase{
     private void createSaveActionPerformed(java.awt.event.ActionEvent evt) {          
     	adicionarInfo.setVisible(true);
     	updateSave.setVisible(false);
+        this.buttonVisible(false);
     	ctr.Update(this);
     }                                          
 
     
     private void createReturnActionPerformed(java.awt.event.ActionEvent evt) {
         cl.show(MainPanel, "Menu");
+        this.buttonVisible(false);
+        adicionarInfo.setVisible(true);
+        updateSave.setVisible(false);
     }   
     private void adicionarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         adicionarInfo.setVisible(false);
@@ -227,7 +249,8 @@ public class UpdateMenu extends TelaBase{
         this.setAreaDesm(TelaBase.areaDes);
         this.setPorIndus(TelaBase.porInd);
         this.setPorReflo(TelaBase.porRef);
-        
+        this.setMonthChoice(TelaBase.mes);
+        this.buttonVisible(true);
     }    
       
     private javax.swing.JPanel UpdateMenu;
@@ -247,6 +270,8 @@ public class UpdateMenu extends TelaBase{
     private javax.swing.JLabel porRefloLabel;
     private javax.swing.JComboBox<String> updateStateChoice;
     private javax.swing.JLabel stateLabel;    
+    private javax.swing.JComboBox<String> monthChoice;
+    private javax.swing.JLabel monthLabel;
     
     //Getters  
     public String getStateChoice(){
@@ -288,4 +313,21 @@ public class UpdateMenu extends TelaBase{
     public String getDataPostada(){
         return dataPost;
     }
-}
+    
+    
+    public String getMonthChoice(){
+        return monthChoice.getItemAt(monthChoice.getSelectedIndex());
+    }
+    public void setMonthChoice(String mes){
+        monthChoice.setSelectedItem(mes);
+    }
+    
+    private void buttonVisible(boolean botao) {
+    	updateStateChoice.setVisible(botao);
+    	updatePorReflo.setVisible(botao);
+    	updatePorIndus.setVisible(botao);
+    	updateAreaDesm.setVisible(botao);
+    	updateArea.setVisible(botao);
+        monthChoice.setVisible(botao);
+        updateYear.setVisible(botao);
+    }}

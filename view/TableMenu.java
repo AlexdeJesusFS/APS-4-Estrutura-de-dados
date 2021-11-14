@@ -8,7 +8,9 @@ public class TableMenu extends TelaBase {
 	
 	
     public TableMenu() {
-        initComponents();} 
+        initComponents();
+        table.setVisible(false);
+    } 
     
     private void initComponents() {
 	TableMenu = new javax.swing.JPanel();
@@ -23,26 +25,17 @@ public class TableMenu extends TelaBase {
 	       
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "id", "Ano da coleta dos dados", "Ultima vez atualizado", "Estado", "Area Total(km²)", "Area desmatada(km²)", "Porcentagem reflorestada", "Porcentagem usada industrialmente"
+                "id", "Ano da coleta de dados", "Mês da coleta de dados", "Ultima atualização", "Estado", "Area Total(km²)", "Area desmatada(km²)", "Porcentagem reflorestada", "Porcentagem usada industrialmente"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -53,9 +46,22 @@ public class TableMenu extends TelaBase {
                 return canEdit [columnIndex];
             }
         });
-        table.setToolTipText("");
         table.getTableHeader().setReorderingAllowed(false);
         tableScroll.setViewportView(table);
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(0).setPreferredWidth(20);
+            table.getColumnModel().getColumn(1).setPreferredWidth(100);
+            table.getColumnModel().getColumn(2).setPreferredWidth(100);
+            table.getColumnModel().getColumn(3).setPreferredWidth(70);
+            table.getColumnModel().getColumn(4).setPreferredWidth(25);
+            table.getColumnModel().getColumn(5).setPreferredWidth(60);
+            table.getColumnModel().getColumn(6).setPreferredWidth(90);
+            table.getColumnModel().getColumn(7).setPreferredWidth(110);
+            table.getColumnModel().getColumn(8).setPreferredWidth(150);
+        }
+        
+        table.setToolTipText("");
+        
 	
 	        infoLabel.setFont(new java.awt.Font("Dialog", 1, 48)); 
 	        infoLabel.setText("Informações");
@@ -98,7 +104,7 @@ public class TableMenu extends TelaBase {
 	                .addContainerGap(307, Short.MAX_VALUE)
 	                .addComponent(infoLabel)
 	                .addContainerGap(307, Short.MAX_VALUE))
-	            .addComponent(tableScroll)
+	            .addComponent(tableScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE)
 	            .addGroup(TableMenuLayout.createSequentialGroup()
 	                .addComponent(infoReturn)
 	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -117,7 +123,7 @@ public class TableMenu extends TelaBase {
 	            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableMenuLayout.createSequentialGroup()
 	                .addGap(36, 36, 36)
 	                .addComponent(infoLabel)
-	                .addGap(5, 5, 5)
+	                .addGap(25, 25, 25)
                         .addGroup(TableMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(archiveSelected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(listAddInfo)
@@ -153,16 +159,18 @@ public class TableMenu extends TelaBase {
     
     private void infoReturnActionPerformed(java.awt.event.ActionEvent evt) {
         cl.show(MainPanel, "Menu");
+        table.setVisible(false);
     }
     private void listAddInfoActionPerformed(java.awt.event.ActionEvent evt) {
     	this.setArchiveName(archiveSelected.getItemAt(archiveSelected.getSelectedIndex()));
         ctr.Read(this);
+        table.setVisible(true);
     }
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {                                       
         //Botão para selecionar uma informação para atualizar na parte com todas informações
         int row = table.getSelectedRow();
-        for(int i = 0; i <8;i++){
+        for(int i = 0; i <9;i++){
             switch(i){
                 case 0:
                     int id = parseInt(table.getModel().getValueAt(row, i).toString());
@@ -173,26 +181,30 @@ public class TableMenu extends TelaBase {
                     TelaBase.ano = ano;
                     break;
                 case 2:
+                    String mes = table.getModel().getValueAt(row, i).toString();
+                    TelaBase.mes = mes;
+                    break;
+                case 3:
                     String atualizada = table.getModel().getValueAt(row, i).toString();
                     TelaBase.atualizada = atualizada;
                     break;
-                case 3:
+                case 4:
                     String estado = table.getModel().getValueAt(row, i).toString();
                     TelaBase.estado = estado;
                     break;
-                case 4:
+                case 5:
                     String areatotal = table.getModel().getValueAt(row, i).toString();
                     TelaBase.areaTo = areatotal;
                     break;
-                case 5:
+                case 6:
                     String areades = table.getModel().getValueAt(row, i).toString();
                     TelaBase.areaDes = areades;
                     break;
-                case 6:
+                case 7:
                     String porref = table.getModel().getValueAt(row, i).toString();
                     TelaBase.porRef = porref;
                     break;
-                case 7:
+                case 8:
                     String porind = table.getModel().getValueAt(row, i).toString();
                     TelaBase.porInd = porind;
                     break;
@@ -200,6 +212,7 @@ public class TableMenu extends TelaBase {
             }
         }
         cl.show(MainPanel, "UpdateMenu");
+        table.setVisible(false);
     }            
     
     public javax.swing.JTable getTable(){

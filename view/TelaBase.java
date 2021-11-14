@@ -7,6 +7,7 @@ public class TelaBase extends javax.swing.JPanel {
     protected static int id = 0;
     protected static String nome = "";
     protected static String ano = "";
+    protected static String mes = "";
     protected static String atualizada = "";
     protected static String estado = "";
     protected static String areaTo = "";

@@ -6,6 +6,7 @@ import control.ControlTela;
 public class SearchMenu extends TelaBase{
     public SearchMenu(){
         initComponents();
+        filteredTable.setVisible(false);
     }
     
     private void initComponents() {
@@ -35,7 +36,7 @@ public class SearchMenu extends TelaBase{
 	infoLabel1.setText("Informações");
 	
 	searchChoice.setFont(new java.awt.Font("Dialog", 0, 14)); 
-	searchChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ano", "Estado", "Area total", "Area desmatada", "Porcentagem reflorestada", "Porcentagem usada industrialmente" }));
+	searchChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ano","Mês", "Estado", "Area total", "Area desmatada", "Porcentagem reflorestada", "Porcentagem usada industrialmente" }));
 	
 	searchChosen.setFont(new java.awt.Font("Dialog", 0, 14));
 	
@@ -47,20 +48,17 @@ public class SearchMenu extends TelaBase{
 	
 	filteredTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "id", "Ano da coleta de dados", "Ultima vez atualizado", "Estado", "Area Total(km²)", "Area desmatada(km²)", "Porcentagem reflorestada", "Porcentagem usada industrialmente"
+                "id", "Ano da coleta de dados", "Mês da coleta de dados", "Ultima atualização", "Estado", "Area Total(km²)", "Area desmatada(km²)", "Porcentagem reflorestada", "Porcentagem usada industrialmente"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -73,26 +71,37 @@ public class SearchMenu extends TelaBase{
         });
         filteredTable.getTableHeader().setReorderingAllowed(false);
         fScrollTable.setViewportView(filteredTable);
+        if (filteredTable.getColumnModel().getColumnCount() > 0) {
+            filteredTable.getColumnModel().getColumn(0).setPreferredWidth(20);
+            filteredTable.getColumnModel().getColumn(1).setPreferredWidth(100);
+            filteredTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            filteredTable.getColumnModel().getColumn(3).setPreferredWidth(70);
+            filteredTable.getColumnModel().getColumn(4).setPreferredWidth(25);
+            filteredTable.getColumnModel().getColumn(5).setPreferredWidth(60);
+            filteredTable.getColumnModel().getColumn(6).setPreferredWidth(90);
+            filteredTable.getColumnModel().getColumn(7).setPreferredWidth(110);
+            filteredTable.getColumnModel().getColumn(8).setPreferredWidth(150);
+        }
 	
 	javax.swing.GroupLayout SearchMenuLayout = new javax.swing.GroupLayout(SearchMenu);
 	SearchMenu.setLayout(SearchMenuLayout);
 	SearchMenuLayout.setHorizontalGroup(
 	    SearchMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	    .addGroup(SearchMenuLayout.createSequentialGroup()
-	    .addContainerGap(307, Short.MAX_VALUE)
-	    .addComponent(infoLabel1)
-	    .addContainerGap(307, Short.MAX_VALUE))
-                .addGroup(SearchMenuLayout.createSequentialGroup()
-	    .addComponent(searchChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-	    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-	    .addComponent(searchChosen)
-	    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-	    .addComponent(filter, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-	        .addGroup(SearchMenuLayout.createSequentialGroup()
+                .addContainerGap(307, Short.MAX_VALUE)
+                .addComponent(infoLabel1)
+                .addContainerGap(307, Short.MAX_VALUE))
+            .addGroup(SearchMenuLayout.createSequentialGroup()
+                .addComponent(searchChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchChosen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(filter, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(SearchMenuLayout.createSequentialGroup()
 	    .addComponent(searchReturn)
 	    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 	    .addComponent(searchSelect))
-	        .addComponent(fScrollTable, javax.swing.GroupLayout.Alignment.TRAILING)
+	        .addComponent(fScrollTable, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE)
 	        );
 	SearchMenuLayout.setVerticalGroup(
 	    SearchMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,7 +125,7 @@ public class SearchMenu extends TelaBase{
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
+            .addGap(0, 1100, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -134,12 +143,13 @@ public class SearchMenu extends TelaBase{
     
     private void searchReturnActionPerformed(java.awt.event.ActionEvent evt){
         cl.show(MainPanel, "Menu");
+        filteredTable.setVisible(false);
     }                                            
 
     private void searchSelectActionPerformed(java.awt.event.ActionEvent evt){                                             
         //Botão para selecionar uma informação para atualizar na parte com informações filtradas
         int row = filteredTable.getSelectedRow();
-        for(int i = 0; i <8;i++){
+        for(int i = 0; i <9;i++){
             switch(i){
                 case 0:
                     int g = parseInt(filteredTable.getModel().getValueAt(row, i).toString());
@@ -150,38 +160,43 @@ public class SearchMenu extends TelaBase{
                     TelaBase.ano = ano;
                     break;
                 case 2:
+                    String mes = filteredTable.getModel().getValueAt(row, i).toString();
+                    TelaBase.mes = mes;
+                    break;
+                case 3:
                     String atualizada = filteredTable.getModel().getValueAt(row, i).toString();
                     TelaBase.atualizada = atualizada;
                     break;
-                case 3:
+                case 4:
                     String estado = filteredTable.getModel().getValueAt(row, i).toString();
                     TelaBase.estado = estado;
                     break;
-                case 4:
+                case 5:
                     String areatotal = filteredTable.getModel().getValueAt(row, i).toString();
                     TelaBase.areaTo = areatotal;
                     break;
-                case 5:
+                case 6:
                     String areades = filteredTable.getModel().getValueAt(row, i).toString();
                     TelaBase.areaDes = areades;
                     break;
-                case 6:
+                case 7:
                     String porref = filteredTable.getModel().getValueAt(row, i).toString();
                     TelaBase.porRef = porref;
                     break;
-                case 7:
+                case 8:
                     String porind = filteredTable.getModel().getValueAt(row, i).toString();
                     TelaBase.porInd = porind;
-                    break;
-                
+                    break;  
             }
         }
         cl.show(MainPanel, "UpdateMenu");
+        filteredTable.setVisible(false);
     }                                            
 
     private void filterActionPerformed(java.awt.event.ActionEvent evt) {
         //Botão para salvar a informação e utilizar para adicionar as informações a tabela
     	ctr.Search(this);
+    	filteredTable.setVisible(true);
     }
      
     private ControlTela ctr = new ControlTela();
