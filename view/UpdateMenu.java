@@ -218,23 +218,21 @@ public class UpdateMenu extends TelaBase{
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(UpdateMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
-        );
-    }
+        );}
       
     private void createSaveActionPerformed(java.awt.event.ActionEvent evt) {          
     	adicionarInfo.setVisible(true);
     	updateSave.setVisible(false);
         this.buttonVisible(false);
-    	ctr.Update(this);
-    }                                          
+    	ctr.Update(this); }                                          
 
     
     private void createReturnActionPerformed(java.awt.event.ActionEvent evt) {
         cl.show(MainPanel, "Menu");
         this.buttonVisible(false);
         adicionarInfo.setVisible(true);
-        updateSave.setVisible(false);
-    }   
+        updateSave.setVisible(false);}   
+    
     private void adicionarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         adicionarInfo.setVisible(false);
         updateSave.setVisible(true);
@@ -250,8 +248,7 @@ public class UpdateMenu extends TelaBase{
         this.setPorIndus(TelaBase.porInd);
         this.setPorReflo(TelaBase.porRef);
         this.setMonthChoice(TelaBase.mes);
-        this.buttonVisible(true);
-    }    
+        this.buttonVisible(true);}    
       
     private javax.swing.JPanel UpdateMenu;
     private javax.swing.JLabel updateLabel;
@@ -275,59 +272,63 @@ public class UpdateMenu extends TelaBase{
     
     //Getters  
     public String getStateChoice(){
-        return updateStateChoice.getItemAt(updateStateChoice.getSelectedIndex());
-    }
+        return updateStateChoice.getItemAt(updateStateChoice.getSelectedIndex());}
+    
     public void setStateChoice(String estado){
-        updateStateChoice.setSelectedItem(estado);
-    }
+        updateStateChoice.setSelectedItem(estado);}
+    
     public void setYearPosted(String year){
-        updateYear.setText(year);
-    }
+        updateYear.setText(year);}
+    
     public String getYearPosted(){
         return updateYear.getText();}
     
     public String getArea(){
-        return updateArea.getText();
-    }
+        return updateArea.getText();}
+    
     public void setArea(String area){
-        updateArea.setText(area);
-    }  
+        updateArea.setText(area); }  
+    
     public String getAreaDesm(){
-        return updateAreaDesm.getText();
-    }
+        return updateAreaDesm.getText();}
+    
     public void setAreaDesm(String aread){
-        updateAreaDesm.setText(aread);
-    }
+        updateAreaDesm.setText(aread);}
+    
     public String getPorIndus(){
-        return updatePorIndus.getText();
-    }
+        return updatePorIndus.getText();}
+    
     public void setPorIndus(String porInd){
         updatePorIndus.setText(porInd);}
     
     public String getPorReflo(){
-        return updatePorReflo.getText();
-    }  
-    public void setPorReflo(String porRef){
-        updatePorReflo.setText(porRef);
-    }
-    public String getDataPostada(){
-        return dataPost;
-    }
+        return updatePorReflo.getText();}  
     
+    public void setPorReflo(String porRef){
+        updatePorReflo.setText(porRef);}
+    
+    public String getDataPostada(){
+        return dataPost;}
     
     public String getMonthChoice(){
-        return monthChoice.getItemAt(monthChoice.getSelectedIndex());
-    }
+        return monthChoice.getItemAt(monthChoice.getSelectedIndex());}
+    
     public void setMonthChoice(String mes){
-        monthChoice.setSelectedItem(mes);
-    }
+        monthChoice.setSelectedItem(mes);}
     
     private void buttonVisible(boolean botao) {
-    	updateStateChoice.setVisible(botao);
-    	updatePorReflo.setVisible(botao);
-    	updatePorIndus.setVisible(botao);
-    	updateAreaDesm.setVisible(botao);
-    	updateArea.setVisible(botao);
-        monthChoice.setVisible(botao);
+    	updateStateChoice.setEditable(botao);
+    	updatePorReflo.setEditable(botao);
+    	updatePorIndus.setEditable(botao);
+    	updateAreaDesm.setEditable(botao);
+    	updateArea.setEditable(botao);
+        monthChoice.setEditable(botao);
         updateYear.setVisible(botao);
-    }}
+        if(botao == false){
+            updateStateChoice.setSelectedIndex(0);
+            updatePorReflo.setText("");
+            updatePorIndus.setText("");
+            updateAreaDesm.setText("");
+            updateArea.setText("");
+            monthChoice.setSelectedIndex(0);
+            updateYear.setText("");}}}

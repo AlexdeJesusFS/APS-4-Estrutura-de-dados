@@ -19,6 +19,8 @@ public class SearchMenu extends TelaBase{
 	filter = new javax.swing.JButton();
 	fScrollTable = new javax.swing.JScrollPane();
 	filteredTable = new javax.swing.JTable();
+    archiveSelected = new javax.swing.JComboBox<>();
+    archiveLabel = new javax.swing.JLabel();
 
 	searchReturn.setFont(new java.awt.Font("Dialog", 0, 14));
 	searchReturn.setText("VOLTAR");
@@ -45,6 +47,12 @@ public class SearchMenu extends TelaBase{
 	filter.addActionListener(new java.awt.event.ActionListener() {
 	    public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filterActionPerformed(evt);}});
+        
+        archiveSelected.setFont(new java.awt.Font("Dialog", 0, 14)); 
+        archiveSelected.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "entrada", "QuickSort", "MergeSort" }));
+
+        archiveLabel.setFont(new java.awt.Font("Dialog", 0, 14)); 
+        archiveLabel.setText("Arquivo:");
 	
 	filteredTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -102,13 +110,22 @@ public class SearchMenu extends TelaBase{
 	    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 	    .addComponent(searchSelect))
 	        .addComponent(fScrollTable, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE)
-	        );
+                .addGroup(SearchMenuLayout.createSequentialGroup()
+                .addGroup(SearchMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, SearchMenuLayout.createSequentialGroup()
+                        .addComponent(archiveLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(archiveSelected, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+	        ;
 	SearchMenuLayout.setVerticalGroup(
 	    SearchMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 	    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SearchMenuLayout.createSequentialGroup()
 	    .addGap(25, 25, 25)
 	    .addComponent(infoLabel1)
 	    .addGap(25, 25, 25)
+                .addGroup(SearchMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(archiveSelected, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(archiveLabel))
 	    .addGroup(SearchMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 	        .addComponent(searchChosen, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
 	        .addComponent(searchChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -197,6 +214,7 @@ public class SearchMenu extends TelaBase{
 
     private void filterActionPerformed(java.awt.event.ActionEvent evt) {
         //Botão para salvar a informação e utilizar para adicionar as informações a tabela
+        this.setArchiveName(archiveSelected.getItemAt(archiveSelected.getSelectedIndex()));
     	filteredTable.setVisible(true);
         ctr.Search(this);	
     }
@@ -211,6 +229,8 @@ public class SearchMenu extends TelaBase{
     private javax.swing.JTextField searchChosen;
     private javax.swing.JButton searchReturn;
     private javax.swing.JButton searchSelect;
+    private javax.swing.JLabel archiveLabel;
+    private javax.swing.JComboBox<String> archiveSelected;
 
     public String getSearchChoice(){
         return searchChoice.getItemAt(searchChoice.getSelectedIndex());
