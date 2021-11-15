@@ -38,7 +38,7 @@ public class SearchMenu extends TelaBase{
 	infoLabel1.setText("Informações");
 	
 	searchChoice.setFont(new java.awt.Font("Dialog", 0, 14)); 
-	searchChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ano","Mês", "Estado", "Area total", "Area desmatada", "Porcentagem reflorestada", "Porcentagem usada industrialmente" }));
+	searchChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ano","Mês", "Data Atualizada","Estado", "Area total", "Area desmatada", "Porcentagem reflorestada", "Porcentagem usada industrialmente" }));
 	
 	searchChosen.setFont(new java.awt.Font("Dialog", 0, 14));
 	

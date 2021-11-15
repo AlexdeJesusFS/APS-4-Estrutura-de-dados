@@ -14,19 +14,6 @@ public class Dados {
 		
 	}
 	
-	public Dados(String ano ,String estado,String mes,String data_atualizada, double area_total, double area_desmatada_ano, double indice_Reflorestamento, double indice_Industrial){
-		setAno(ano);
-		setMes(mes);
-		setDataAtualizada(data_atualizada);
-		setEstado(estado);
-		setAreaTotal(area_total);
-		setAreaDesmatadaAno(area_desmatada_ano);
-		setIndReflorestamento(indice_Reflorestamento);
-		setIndIndustrial(indice_Industrial);
-		
-	}
-	
-	
 	//Getter and Setters
 	public int getIndice() {
 		return indice;

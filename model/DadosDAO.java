@@ -61,6 +61,7 @@ public class DadosDAO {
 		if(arquivo.isFile()) {
 			bw = new BufferedWriter(new FileWriter(arquivo,false));
 			bw.write("");
+			bw.close();
 			informacao.forEach((dado) -> EscreverArquivo(dado,nome_do_Arquivo));
 		} else {
 			semArquivo(nome_do_Arquivo);
@@ -91,6 +92,7 @@ public class DadosDAO {
 				}
 			}
 			while(verificador!=null);
+			br.close();
 			for (Dados dado : lista) {
 				dado.setIndice(Indice(lista, dado));
 			}
@@ -101,7 +103,6 @@ public class DadosDAO {
 	}
 	//Atualiza o valor do arquivo de dados de acordo com o indice recebido.
 	public void Update(int indice, Dados dado, ArrayList<Dados> lista, String nome_do_Arquivo) throws IOException{
-		
 		lista.set(indice, dado);
 		EscreverArquivo(lista, nome_do_Arquivo);
 	}
