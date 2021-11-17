@@ -29,7 +29,7 @@ public class SearchMenu extends TelaBase{
 	        searchReturnActionPerformed(evt);}});
 	
 	searchSelect.setFont(new java.awt.Font("Dialog", 0, 14)); 
-	searchSelect.setText("SELECT");
+	searchSelect.setText("MODIFICA");
 	searchSelect.addActionListener(new java.awt.event.ActionListener() {
 	    public void actionPerformed(java.awt.event.ActionEvent evt) {
 	        searchSelectActionPerformed(evt);}});
@@ -165,8 +165,13 @@ public class SearchMenu extends TelaBase{
 
     private void searchSelectActionPerformed(java.awt.event.ActionEvent evt){                                             
         //Botão para selecionar uma informação para atualizar na parte com informações filtradas
+    	
         int row = filteredTable.getSelectedRow();
         if(row>=0) {
+        	if(archiveSelected.getSelectedIndex()!= 0){
+        		ctr.show("Não é possivel modificar os dados do arquivo ordenado.");
+        		return;
+        	}
         	for(int i = 0; i <9;i++){
                 switch(i){
                     case 0:

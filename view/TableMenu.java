@@ -75,7 +75,7 @@ public class TableMenu extends TelaBase {
 	        });
 	
 	        select.setFont(new java.awt.Font("Dialog", 0, 14)); 
-	        select.setText("SELECT");
+	        select.setText("MODIFICA");
 	        select.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(java.awt.event.ActionEvent evt) {
 	                selectActionPerformed(evt);
@@ -171,6 +171,10 @@ public class TableMenu extends TelaBase {
         //Botão para selecionar uma informação para atualizar na parte com todas informações
         int row = table.getSelectedRow();
         if(row>=0) {
+        	if(archiveSelected.getSelectedIndex()!= 0){
+        		ctr.show("Não é possivel modificar os dados do arquivo ordenado.");
+        		return;
+        	}
         	for(int i = 0; i <9;i++){
                 switch(i){
                     case 0:

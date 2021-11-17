@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -47,7 +45,12 @@ public class ControlTela {
 	}
 	
 	public void Insert(CreateMenu tela) {
+		if(tela.getYearPosted().equals("")) {
+			show("Preencha todos os campos.");
+			return;
+		}
 		try {
+			
 			Dados insert = new Dados();
 			insert.setAno(tela.getYearPosted());
 			insert.setMes(tela.getMonthChoice());
@@ -60,9 +63,8 @@ public class ControlTela {
 			manager.EscreverArquivo(insert, "entrada");
 			JOptionPane.showMessageDialog(tela, "Dado Adicionado com Sucesso!");
 		}catch(Exception e) {
-			show(e);
+			show("Verifique se os dados foram digitados corretamente e que todos os campos foram preenchidos.\nCodigo do erro:"+e);
 		}
-		
 	}
 	
 	public void Read(TableMenu tela) {
@@ -90,6 +92,10 @@ public class ControlTela {
 	}
 	
 	public void Update(UpdateMenu tela) {
+		if(tela.getYearPosted().equals("")) {
+			show("Preencha todos os campos.");
+			return;
+		}
 		Dados dado = new Dados();
 		try {
 			dado.setAno(tela.getYearPosted());
@@ -105,7 +111,7 @@ public class ControlTela {
 		}catch(IOException e) {
 			show(e);
 		}catch(Exception e) {
-			show(e);
+			show("Verifique se os dados foram digitados corretamente e que todos os campos foram preenchidos.\nCodigo do erro:"+e);
 		}
 	}
 	
@@ -133,11 +139,11 @@ public class ControlTela {
 		}
 	}
 	
-	private ArrayList<Dados> SelectSearch(String posicao, SearchMenu tela, String nome_do_arquivo) throws IOException{
+	private ArrayList<Dados> SelectSearch(String tipo_pesquisa, SearchMenu tela, String nome_do_arquivo) throws IOException{
 		ArrayList<Dados> resultado = new ArrayList<Dados>();
 		String valor_Pesquisa = tela.getSearchChosen();
 		try {
-			switch(posicao) {
+			switch(tipo_pesquisa) {
 			//valor de Posição é igual ao nome das opções do combobox no SearchMenu
 			case "Ano":
 				resultado = manager.PesquisaAno(valor_Pesquisa, nome_do_arquivo);
@@ -166,7 +172,7 @@ public class ControlTela {
 			}
 		}
 		catch(Exception e) {
-			show(e);
+			show("Verifique se os dados foram digitados corretamente\nCodigo do erro:"+e);
 		}
 		return resultado;
 	}
@@ -174,7 +180,7 @@ public class ControlTela {
 	public void Delete(TelaAPS tela) {
 		try{
 			manager.Delete("entrada");
-			JOptionPane.showMessageDialog(tela, "Primeiro dado deletado da fila com Sucesso!", "Deletado", 0);
+			JOptionPane.showMessageDialog(tela, "Primeiro dado deletado da fila com sucesso!", "Deletado", 0);
 		} catch(IOException e){
 				show(e);
 		}
@@ -216,6 +222,10 @@ public class ControlTela {
 	
 	private void show(Exception e) {
 		JOptionPane.showMessageDialog(null, e, "Erro", 0);
+	}
+	
+	public void show(String mensagem) {
+		JOptionPane.showMessageDialog(null, mensagem, "Erro", 0);
 	}
 	
 	private void IniciaDados() throws IOException{

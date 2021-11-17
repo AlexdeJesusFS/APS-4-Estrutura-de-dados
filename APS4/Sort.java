@@ -55,21 +55,21 @@ public class Sort {
 		merge(lista, esquerda, direita, meio, tamanho - meio);
 	}
 	
-	private void merge(ArrayList<Dados> listaInicial, ArrayList<Dados> listaEsquerda, ArrayList<Dados> listaDireita, int esquerda, int direita) {
+	private void merge(ArrayList<Dados> lista_Inicial, ArrayList<Dados> lista_Esquerda, ArrayList<Dados> lista_Direita, int esquerda, int direita) {
 		int i = 0, j = 0, k = 0;
 		
 		while(i < esquerda && j < direita) {
-			if(Compara(listaEsquerda.get(i).getAno(), listaDireita.get(j).getAno())) {
-				listaInicial.set(k++, listaEsquerda.get(i++));
+			if(Compara(lista_Esquerda.get(i).getAno(), lista_Direita.get(j).getAno())) {
+				lista_Inicial.set(k++, lista_Esquerda.get(i++));
 			} else {
-				listaInicial.set(k++, listaDireita.get(j++));
+				lista_Inicial.set(k++, lista_Direita.get(j++));
 			}
 		}
 		while(i<esquerda) {
-			listaInicial.set(k++, listaEsquerda.get(i++));
+			lista_Inicial.set(k++, lista_Esquerda.get(i++));
 		}
 		while(j<direita) {
-			listaInicial.set(k++, listaDireita.get(j++));
+			lista_Inicial.set(k++, lista_Direita.get(j++));
 		}
 	}
 	

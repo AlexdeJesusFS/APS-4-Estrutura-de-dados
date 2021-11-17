@@ -49,7 +49,7 @@ public class TelaAPS extends javax.swing.JFrame {
         });
 	
         apagar.setFont(new java.awt.Font("Dialog", 0, 14));
-        apagar.setText("DELETAR ARQUIVO");
+        apagar.setText("DELETAR DADO");
         apagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 apagarActionPerformed(evt);
