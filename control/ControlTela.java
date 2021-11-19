@@ -34,7 +34,7 @@ public class ControlTela {
 		try {
 			File arquivo = new File("C:/Aps4Dados/entrada.txt");
 			if(arquivo.isFile()) {
-				JOptionPane.showMessageDialog(tela, "Arquivo entrada.txt já foi criado.");
+				JOptionPane.showMessageDialog(tela, "Arquivo entrada.txt já foi criado.", "Arquivo Criado", 1);
 			}else {
 				manager.CriarArquivo("entrada");
 				IniciaDados();
@@ -61,7 +61,7 @@ public class ControlTela {
 			insert.setIndIndustrial(Double.parseDouble(tela.getPorIndus()));
 			insert.setDataAtualizada(tela.getDataPostada());
 			manager.EscreverArquivo(insert, "entrada");
-			JOptionPane.showMessageDialog(tela, "Dado Adicionado com Sucesso!");
+			JOptionPane.showMessageDialog(tela, "Dado adicionado com Sucesso!");
 		}catch(Exception e) {
 			show("Verifique se os dados foram digitados corretamente e que todos os campos foram preenchidos.\nCodigo do erro:"+e);
 		}
@@ -92,15 +92,12 @@ public class ControlTela {
 	}
 	
 	public void Update(UpdateMenu tela) {
-		if(tela.getYearPosted().equals("")) {
-			show("Preencha todos os campos.");
-			return;
-		}
 		Dados dado = new Dados();
 		try {
 			dado.setAno(tela.getYearPosted());
-			dado.setAno(tela.getMonthChoice());
+			dado.setMes(tela.getMonthChoice());
 			dado.setEstado(tela.getStateChoice());
+			System.out.println(tela.getArea());
 			dado.setAreaTotal(Double.parseDouble(tela.getArea()));
 			dado.setAreaDesmatadaAno(Double.parseDouble(tela.getAreaDesm()));
 			dado.setIndReflorestamento(Double.parseDouble(tela.getPorReflo()));
@@ -108,6 +105,7 @@ public class ControlTela {
 			dado.setDataAtualizada(tela.getDataPostada());
 			ArrayList<Dados> lista = manager.LerArquivo("entrada");
 			manager.Update(tela.getID(), dado, lista, "entrada");
+			JOptionPane.showMessageDialog(tela, "Dado editado com Sucesso!");
 		}catch(IOException e) {
 			show(e);
 		}catch(Exception e) {
@@ -180,7 +178,7 @@ public class ControlTela {
 	public void Delete(TelaAPS tela) {
 		try{
 			manager.Delete("entrada");
-			JOptionPane.showMessageDialog(tela, "Primeiro dado deletado da fila com sucesso!", "Deletado", 0);
+			JOptionPane.showMessageDialog(tela, "Primeiro dado deletado da fila com sucesso!", "Deletado", 1);
 		} catch(IOException e){
 				show(e);
 		}
@@ -190,7 +188,7 @@ public class ControlTela {
 		try {
 			ArrayList<Dados> lista = manager.LerArquivo("entrada");
 			if(lista.isEmpty()) {
-				JOptionPane.showMessageDialog(tela, "O Arquivo de Dados entrada.txt ainda não existe.\nCrie ele no botão ");
+				return;
 			}else {
 				log.info("Inicio do QuickSort com "+ lista.size() + " objetos.");
 				sort.quickSort(lista, 0, lista.size()-1);
@@ -207,7 +205,7 @@ public class ControlTela {
 		try {
 			ArrayList<Dados> lista = manager.LerArquivo("entrada");
 			if(lista.isEmpty()) {
-				JOptionPane.showMessageDialog(tela, "O Arquivo de Dados entrada.txt ainda não existe.\nCrie ele no botão ");
+				return;
 			}else {
 				log.info("Inicio do MergeSort com "+ lista.size() + " objetos.");
 				sort.mergeSort(lista, lista.size()-1);
@@ -237,7 +235,7 @@ public class ControlTela {
 	    int month = localDate.getMonthValue();
 	    int day = localDate.getDayOfMonth();
 	    String data_atualizada = year+"/"+month+"/"+day;
-		for(int i = 0; i<1000; i++) {
+		for(int i = 0; i<100000; i++) {
 			Dados informacao = new Dados();
 			informacao.setAno(Integer.toString(1950+rnd.nextInt(71)));
 			informacao.setMes(selectMes(rnd.nextInt(12)));

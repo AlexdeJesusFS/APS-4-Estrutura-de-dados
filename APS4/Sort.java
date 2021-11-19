@@ -14,7 +14,7 @@ public class Sort {
 	}
 	
 	public int separar(ArrayList<Dados>lista, int inicio, int fim) {
-		Dados pivo = lista.get(inicio);
+		Dados pivo = lista.get((inicio+fim)/2);
 		int i = inicio +1, f = fim;
 		while(i<=f) {
 			if(Compara(lista.get(i).getAno(), pivo.getAno())) {

@@ -35,7 +35,7 @@ public class SearchMenu extends TelaBase{
 	        searchSelectActionPerformed(evt);}});
 	
 	infoLabel1.setFont(new java.awt.Font("Dialog", 1, 48)); 
-	infoLabel1.setText("Informações");
+	infoLabel1.setText("Pesquisar");
 	
 	searchChoice.setFont(new java.awt.Font("Dialog", 0, 14)); 
 	searchChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ano","Mês", "Data Atualizada","Estado", "Area total", "Area desmatada", "Porcentagem reflorestada", "Porcentagem usada industrialmente" }));
@@ -50,7 +50,9 @@ public class SearchMenu extends TelaBase{
         
         archiveSelected.setFont(new java.awt.Font("Dialog", 0, 14)); 
         archiveSelected.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "entrada", "QuickSort", "MergeSort" }));
-
+        archiveSelected.addActionListener(new java.awt.event.ActionListener() {
+    		public void actionPerformed(java.awt.event.ActionEvent evt) {
+    			archiveSelectedActionPerformed(evt);}});
         archiveLabel.setFont(new java.awt.Font("Dialog", 0, 14)); 
         archiveLabel.setText("Arquivo:");
 	
@@ -188,7 +190,7 @@ public class SearchMenu extends TelaBase{
                         break;
                     case 3:
                         String atualizada = filteredTable.getModel().getValueAt(row, i).toString();
-                        TelaBase.atualizada = atualizada;
+                        TelaBase.data_atualizada = atualizada;
                         break;
                     case 4:
                         String estado = filteredTable.getModel().getValueAt(row, i).toString();
@@ -196,19 +198,19 @@ public class SearchMenu extends TelaBase{
                         break;
                     case 5:
                         String areatotal = filteredTable.getModel().getValueAt(row, i).toString();
-                        TelaBase.areaTo = areatotal;
+                        TelaBase.area_total = areatotal;
                         break;
                     case 6:
                         String areades = filteredTable.getModel().getValueAt(row, i).toString();
-                        TelaBase.areaDes = areades;
+                        TelaBase.area_desmatada = areades;
                         break;
                     case 7:
                         String porref = filteredTable.getModel().getValueAt(row, i).toString();
-                        TelaBase.porRef = porref;
+                        TelaBase.indice_reflorestamento = porref;
                         break;
                     case 8:
                         String porind = filteredTable.getModel().getValueAt(row, i).toString();
-                        TelaBase.porInd = porind;
+                        TelaBase.indice_industrial = porind;
                         break;  
                 }
             }
@@ -224,6 +226,12 @@ public class SearchMenu extends TelaBase{
         ctr.Search(this);	
     }
      
+    private void archiveSelectedActionPerformed(java.awt.event.ActionEvent evt) {
+    	javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) getTable().getModel();
+    	modelo.setRowCount(0);
+    	getTable().setModel(modelo);
+    }
+    
     private ControlTela ctr = new ControlTela();
     private javax.swing.JPanel SearchMenu;
     private javax.swing.JScrollPane fScrollTable;

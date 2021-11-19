@@ -84,6 +84,9 @@ public class TableMenu extends TelaBase {
                 
                 archiveSelected.setFont(new java.awt.Font("Dialog", 0, 14)); 
                 archiveSelected.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "entrada", "QuickSort", "MergeSort"}));
+                archiveSelected.addActionListener(new java.awt.event.ActionListener() {
+            		public void actionPerformed(java.awt.event.ActionEvent evt) {
+            			archiveSelectedActionPerformed(evt);}});
 
                 listAddInfo.setFont(new java.awt.Font("Dialog", 0, 14)); 
                 listAddInfo.setText("SELECIONAR");
@@ -191,7 +194,7 @@ public class TableMenu extends TelaBase {
                         break;
                     case 3:
                         String atualizada = table.getModel().getValueAt(row, i).toString();
-                        TelaBase.atualizada = atualizada;
+                        TelaBase.data_atualizada = atualizada;
                         break;
                     case 4:
                         String estado = table.getModel().getValueAt(row, i).toString();
@@ -199,19 +202,19 @@ public class TableMenu extends TelaBase {
                         break;
                     case 5:
                         String areatotal = table.getModel().getValueAt(row, i).toString();
-                        TelaBase.areaTo = areatotal;
+                        TelaBase.area_total = areatotal;
                         break;
                     case 6:
                         String areades = table.getModel().getValueAt(row, i).toString();
-                        TelaBase.areaDes = areades;
+                        TelaBase.area_desmatada = areades;
                         break;
                     case 7:
                         String porref = table.getModel().getValueAt(row, i).toString();
-                        TelaBase.porRef = porref;
+                        TelaBase.indice_reflorestamento = porref;
                         break;
                     case 8:
                         String porind = table.getModel().getValueAt(row, i).toString();
-                        TelaBase.porInd = porind;
+                        TelaBase.indice_industrial = porind;
                         break;
                 }
             }
@@ -219,6 +222,12 @@ public class TableMenu extends TelaBase {
             table.setVisible(false);
         }
     }            
+    
+    private void archiveSelectedActionPerformed(java.awt.event.ActionEvent evt) {
+    	javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) getTable().getModel();
+    	modelo.setRowCount(0);
+    	getTable().setModel(modelo);
+    }
     
     public javax.swing.JTable getTable(){
     	return table;

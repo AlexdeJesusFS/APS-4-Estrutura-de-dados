@@ -223,9 +223,9 @@ public class UpdateMenu extends TelaBase{
     private void createSaveActionPerformed(java.awt.event.ActionEvent evt) {          
     	adicionarInfo.setVisible(true);
     	updateSave.setVisible(false);
-        this.buttonVisible(false);
-    	ctr.Update(this); }                                          
-
+    	ctr.Update(this);
+    	this.buttonVisible(false);}                                          
+    
     
     private void createReturnActionPerformed(java.awt.event.ActionEvent evt) {
         cl.show(MainPanel, "Menu");
@@ -243,10 +243,10 @@ public class UpdateMenu extends TelaBase{
             month = localDate.getMonthValue();
             day = localDate.getDayOfMonth();
             dataPost = year+"/"+month+"/"+day;
-        this.setArea(TelaBase.areaTo);
-        this.setAreaDesm(TelaBase.areaDes);
-        this.setPorIndus(TelaBase.porInd);
-        this.setPorReflo(TelaBase.porRef);
+        this.setArea(TelaBase.area_total);
+        this.setAreaDesm(TelaBase.area_desmatada);
+        this.setPorIndus(TelaBase.indice_industrial);
+        this.setPorReflo(TelaBase.indice_reflorestamento);
         this.setMonthChoice(TelaBase.mes);
         this.buttonVisible(true);}    
       
@@ -317,12 +317,12 @@ public class UpdateMenu extends TelaBase{
         monthChoice.setSelectedItem(mes);}
     
     private void buttonVisible(boolean botao) {
-    	updateStateChoice.setEditable(botao);
+    	updateStateChoice.setEnabled(botao);
     	updatePorReflo.setEditable(botao);
     	updatePorIndus.setEditable(botao);
     	updateAreaDesm.setEditable(botao);
     	updateArea.setEditable(botao);
-        monthChoice.setEditable(botao);
+        monthChoice.setEnabled(botao);
         updateYear.setVisible(botao);
         if(botao == false){
             updateStateChoice.setSelectedIndex(0);

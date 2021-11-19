@@ -20,7 +20,7 @@ public class DadosDAO {
 			arquivo = new File("C:/Aps4Dados/"+nome_do_Arquivo+".txt");
 			arquivo.getParentFile().mkdir();
 			if(arquivo.createNewFile()) {
-				JOptionPane.showMessageDialog(null,"Arquivo "+arquivo.getName()+" Criado com sucesso!");
+				JOptionPane.showMessageDialog(null,"Arquivo "+arquivo.getName()+" criado com sucesso!", "Arquivo Criado", 1);
 			}
 	}
 	
@@ -133,7 +133,7 @@ public class DadosDAO {
 		ArrayList<Dados> resultado = new ArrayList<Dados>();
 		ArrayList<Dados> informacoes = LerArquivo(nome_do_Arquivo);
 		for(Dados dado: informacoes) {
-			if(dado.getAno().equals(mes)) {
+			if(dado.getMes().toLowerCase().equals(mes.toLowerCase())) {
 				resultado.add(dado);
 			}
 		}
@@ -155,7 +155,7 @@ public class DadosDAO {
 		ArrayList<Dados> resultado = new ArrayList<Dados>();
 		ArrayList<Dados> informacoes = LerArquivo(nome_do_Arquivo);
 		for(Dados dado: informacoes) {
-			if(dado.getEstado().equals(estado)) {
+			if(dado.getEstado().toLowerCase().equals(estado.toLowerCase())) {
 				resultado.add(dado);
 			}
 		}
