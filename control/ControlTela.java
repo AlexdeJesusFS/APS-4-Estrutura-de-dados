@@ -208,7 +208,7 @@ public class ControlTela {
 				return;
 			}else {
 				log.info("Inicio do MergeSort com "+ lista.size() + " objetos.");
-				sort.mergeSort(lista, lista.size()-1);
+				sort.mergeSort(lista, lista.size());
 				log.info("Termino do MergeSort com "+ lista.size() + " objetos.");
 				manager.CriarArquivo("MergeSort");
 				manager.EscreverArquivo(lista, "MergeSort");
@@ -235,7 +235,7 @@ public class ControlTela {
 	    int month = localDate.getMonthValue();
 	    int day = localDate.getDayOfMonth();
 	    String data_atualizada = year+"/"+month+"/"+day;
-		for(int i = 0; i<100000; i++) {
+		for(int i = 0; i<1000; i++) {
 			Dados informacao = new Dados();
 			informacao.setAno(Integer.toString(1950+rnd.nextInt(71)));
 			informacao.setMes(selectMes(rnd.nextInt(12)));
